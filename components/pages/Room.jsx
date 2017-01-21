@@ -15,7 +15,7 @@ export default class ExampleComponent extends Component {
   render() {
     return (
       <div>
-        <Editor />
+        <Editor width="100px" height="100px" />
       </div>
     );
   }
