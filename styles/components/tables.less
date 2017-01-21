@@ -1,0 +1,38 @@
+// Tables
+.table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+
+  &.table-striped {
+    tbody {
+      tr:nth-of-type(odd) {
+        background: @grey-light-light;
+      }
+    }
+  }
+  &.table-hover {
+    tbody {
+      tr {
+        &:hover {
+          background: @grey-light;
+        }
+        &.selected {
+          background: @grey-light;
+            &:hover {
+            background: @grey-light-dark;
+          }
+        }
+      }
+    }
+  }
+  th,
+  td {
+    border-bottom: .1rem solid @grey-light;
+    padding: 1.5rem 1rem;
+    text-align: left;
+  }
+  th {
+    border-color: @grey-light-dark;
+  }
+}

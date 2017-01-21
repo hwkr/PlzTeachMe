@@ -1,0 +1,13 @@
+# Built files and Site
+index.html
+dist/
+site/
+
+# Dependency directory
+node_modules
+
+# Source maps
+*.map
+
+# Files marked with gitigx
+*gitigx*

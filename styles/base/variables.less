@@ -1,0 +1,101 @@
+// Core variables
+
+// Global
+@html-font-size: 10px;
+@html-line-height: 1.428571429;
+@html-bg: @grey-light;
+@body-bg: @grey-white;
+@body-font-color: @grey-dark-light;
+@body-font-size: 1.4rem;
+// https://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/
+@body-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Hiragino Kaku Gothic Pro", Meiryo, "Malgun Gothic", "Helvetica Neue", sans-serif;
+
+// Sizes
+@layout-gutter: 2rem;
+@layout-padding: 2rem;
+@layout-margin: 2rem;
+@border-radius: 0.3rem;
+
+@header-height: 4rem;
+@footer-height: 3rem;
+
+// Colors
+@grey-white: #fff;
+
+@grey-light-light: #f8f8f8;
+@grey-light: #eee;
+@grey-light-dark: #ccc;
+
+@grey-mid-light: #aaa;
+@grey-mid: #888;
+@grey-mid-dark: #666;
+
+@grey-dark-light: #333;
+@grey-dark: #222;
+@grey-dark-dark: #111;
+
+@grey-black: #000;
+
+@core-color-bright: lighten(@core-color, 30%);
+@core-color: #00DD99;
+@core-color-dark: darken(@core-color, 30%);
+
+@core-secondary-color: lighten(@core-color, 40%);
+
+@core-light-color: @grey-white;
+@core-meta-color: @grey-mid;
+
+@core-link-color: @core-color;
+@core-link-dark-color: @core-color-dark;
+
+@core-border-color: @grey-light;
+@core-empty-bg: @grey-dark;
+@control-color: @grey-light-dark;
+@control-color-success: #32b643;
+@control-color-info: #0193eb;
+@control-color-warning: #ffb700;
+@control-color-danger: #e85600;
+
+
+
+// Responsive breakpoints
+@size-xs: 480px;
+@size-sm: 600px;
+@size-md: 840px;
+@size-lg: 960px;
+@size-xl: 1280px;
+
+// Mixins
+.clearfix() {
+  &::after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+}
+.toast-variant(@color) {
+  background: @color;
+  border-color: darken(@color, 2%);
+  color: @core-light-color;
+
+  a {
+    color: @core-light-color;
+
+    &:hover,
+    &:focus,
+    &:active {
+      opacity: .75;
+    }
+  }
+}
+.label-base() {
+  border-radius: .2rem;
+  display: inline;
+  font-size: 1em;
+  padding: .1em .3em;
+  vertical-align: baseline;
+}
+.label-variant(@color) {
+  background: @color;
+  color: @core-light-color;
+}
