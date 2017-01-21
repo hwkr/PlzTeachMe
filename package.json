@@ -13,6 +13,7 @@
   "author": "Brynn Hawker",
   "license": "MIT",
   "dependencies": {
+    "chance": "^1.0.4",
     "classnames": "^2.2.5",
     "current-input": "^1.1.0",
     "re-base": "^2.5.2",
