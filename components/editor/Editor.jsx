@@ -33,11 +33,11 @@ export default class Editor extends React.Component {
     });
     this.state = {
       loading: false,
+      userName: '',
       content: {
         html: '',
         css: '',
         javascript: '',
-        userName: '',
       },
     };
     this.setInitialState();
@@ -81,8 +81,8 @@ export default class Editor extends React.Component {
         html: '',
         css: '',
         javascript: '',
-        userName: this.props.userName,
       },
+      userName: '',
     });
   }
 
@@ -116,10 +116,6 @@ export default class Editor extends React.Component {
             :
             <Preview content={generateCombinedHtml(content)} />
           }
-
-
-
-
         </div>
       </div>
     );
