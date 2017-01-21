@@ -5,8 +5,18 @@ import * as Firebase from 'functions/firebase';
 import TextEditor from './TextEditor';
 import Preview from './Preview';
 
+function generateCombinedHtml(content) {
+  return (
+    `
+      <script>${eval(content.javascript)}</script>
+      <style>${content.css}</style>
+      <div>${content.html}</div>
+    `
+  );
+}
+
 export default class Editor extends React.Component {
-  static PropTypes = {
+  static propTypes = {
     userID: PropTypes.string,
     userName: PropTypes.string,
   }
@@ -65,9 +75,9 @@ export default class Editor extends React.Component {
   setInitialState = () => {
     this.setState({
       content: {
-        html: '// HTML',
-        css: '// CSS',
-        javascript: '// Javascript',
+        html: '',
+        css: '',
+        javascript: '',
         userName: this.props.userName,
       },
     });
@@ -93,7 +103,7 @@ export default class Editor extends React.Component {
           <TextEditor mode="javascript" content={this.state.content.javascript} onChange={this.setJavascript} />
         </div>
         <div className="liveViewContainer">
-          <Preview />
+          <Preview content={generateCombinedHtml(this.state.content)} />
         </div>
       </div>
     );
