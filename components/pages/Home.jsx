@@ -17,10 +17,6 @@ export default class Home extends Component {
   // static defaultProps = {
   // }
 
-  openChat = () => {
-    window.open(Config.chat_url, 'newwindow', 'width=500, height=600'); return false;
-  }
-
   render() {
     return (
       <div className="home">
@@ -28,9 +24,14 @@ export default class Home extends Component {
           <div className="columns">
             <div className="column col-12 text-center">
               <h1>
-                Lol, plz.
-                <Icon name="heart"/>
+                Welcome    
               </h1>
+            </div>
+            <div className="column col-12 text-center">
+              <div class="input-group">
+                  <span class="input-group-addon">plzteach.me/room/</span>
+                  <input type="text" class="form-input" placeholder="site name" />
+              </div>
             </div>
           </div>
         </div>
