@@ -40,12 +40,13 @@ export default class Home extends Component {
 
   checkName = (e) => {
     const inputValue = e.target.value;
-    const matches = this.state.rooms.filter((item) => item.name === inputValue);
+    const matches = this.state.rooms.filter((item) => item.key === inputValue);
     this.setState({
       isAvailable: matches.length === 0,
       inputValue,
     });
   }
+
 
   render() {
     return (

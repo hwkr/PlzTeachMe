@@ -11,7 +11,7 @@ const firebaseConfig = {
 const ref = Rebase.createClass(firebaseConfig);
 
 export function createRoom(roomName, callback) {
-  return ref.push('rooms', {
+  return ref.push(`rooms/${roomName}`, {
     data: { name: roomName },
   }).then(() => {
     console.log('Room Created');
