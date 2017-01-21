@@ -7,7 +7,7 @@ export default class TextEditor extends React.Component {
     height: PropTypes.string,
     editorType: PropTypes.string,
     lineNumbers: PropTypes.bool,
-    mode: 'html' | 'css' | 'javascript',
+    mode: PropTypes.string,
   };
 
   static defaultProps = {
