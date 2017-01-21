@@ -30,10 +30,11 @@ export default class Room extends React.Component {
   }
 
   render() {
+    const { userName, userID } = this.state;
     return (
       <div>
-        <input value={this.state.userName} type="text" placeholder="username" onChange={this.changeName} />
-        <Editor userID={this.state.userID} userName={this.state.userName} />
+        <input value={userName} type="text" placeholder="username" onChange={this.changeName} />
+        <Editor userID={userID} userName={userName} />
       </div>
     );
   }
