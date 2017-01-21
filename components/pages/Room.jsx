@@ -13,14 +13,15 @@ export default class ExampleComponent extends Component {
   }
 
   render() {
-    const options = {
-      type: 'javascript',
-      width: '100px',
-      height: '100px',
+    const baseOptions = {
+      lineNumbers: true,
+      width: '30%',
     };
     return (
       <div>
-        <Editor options={options} />
+        <Editor options={Object.assign({ mode: 'html' }, baseOptions)} />
+        <Editor options={Object.assign({ mode: 'css' }, baseOptions)} />
+        <Editor options={Object.assign({ mode: 'javascript' }, baseOptions)} />
       </div>
     );
   }

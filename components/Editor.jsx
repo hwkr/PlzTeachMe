@@ -32,7 +32,7 @@ export default class ExampleComponent extends Component {
 
   render() {
     return (
-      <div className="CodeMirrorComponent">
+      <div className="codeEditor">
         <CodeMirror ref={this.editorRefCallback} value={this.state.code} onChange={this.updateCode} options={this.props.options} />
       </div>
     );
