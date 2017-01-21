@@ -1,13 +1,19 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default class Preview extends React.Component {
+export default class Preview extends Component {
   static propTypes = {
     content: PropTypes.any,
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
   render() {
     return (
-      <div dangerouslySetInnerHTML={{ __html: this.props.content }} />
+      <div className="preview" dangerouslySetInnerHTML={{ __html: this.props.content }} />
     );
   }
 }

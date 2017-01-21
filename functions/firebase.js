@@ -10,6 +10,26 @@ const firebaseConfig = {
 
 const ref = Rebase.createClass(firebaseConfig);
 
+export function createUser(userId, userName, roomName, callback) {
+  return ref.push(`rooms/${roomName}/${userId}`, {
+    data: {
+      user: {
+        userName,
+      },
+      editorContent: {
+        html: '',
+        css: '',
+        javascript: '',
+      },
+    },
+  }).then(() => {
+    callback();
+  }).catch(err => {
+    // handle error
+    console.error(err);
+  });
+}
+
 export function createRoom(roomName, callback) {
   return ref.push(`rooms/${roomName}`, {
     data: { name: roomName },
