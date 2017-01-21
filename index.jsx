@@ -31,8 +31,8 @@ const routes = (
   <Route path="/" mapMenuTitle="Home" component={App}>
     <IndexRoute component={Home} />
 
-    <Route path="/teach/:roomName" component={Teach} />
-    <Route path="room" mapMenuTitle="Example" component={Room} />
+    <Route path="teach/:roomName" mapMenuTitle="Teach" component={Teach} />
+    <Route path="room/:roomName" mapMenuTitle="Room" component={Room} />
     <Route path="example" mapMenuTitle="Example" component={ExampleComponent}>
       <Route path="two-deep" mapMenuTitle="Two Deep" component={ExampleTwoDeepComponent} />
     </Route>
