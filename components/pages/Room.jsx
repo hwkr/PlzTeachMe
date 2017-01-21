@@ -5,7 +5,7 @@ import uuidV4 from 'uuid/v4';
 
 import Icon from 'parts/Icon';
 
-import Editor from 'components/editor/Editor';
+import StudentView from 'views/StudentView';
 
 export default class Room extends Component {
   static propTypes = {
@@ -17,22 +17,16 @@ export default class Room extends Component {
 
   constructor(props) {
     super(props);
-    const { roomName } = this.props.params;
 
     this.ref = Firebase.getFirebaseInstance();
 
     this.state = {
       loading: true,
       roomExists: false,
-      user: {
-        userName: '',
-      },
+      userExists: false,
     };
 
-    this.ref.fetch(`rooms/${roomName}`, {
-      context: this,
-      then: this.isRoom,
-    });
+    this.checkRoom();
   }
 
   createUserId = () => {
@@ -50,40 +44,51 @@ export default class Room extends Component {
         },
       },
     }).then(() => {
-      window.history.pushState({}, 'Room', `${window.location.href}/${userId}`);
+      window.location.href += `/${userId}`;
     }).catch(err => {
       // handle error
       console.error(err);
     });
   }
 
-  isRoom = (room) => {
-    const { roomName, userId } = this.props.params;
+  checkRoom = () => {
+    const { roomName } = this.props.params;
 
-    if (!room) {
-      this.setState({ roomExists: false });
+    this.ref.fetch(`rooms/${roomName}`, {
+      context: this,
+      then: (room) => {
+        if (room) {
+          this.setState({ roomExists: true });
+          this.checkUser();
+        } else {
+          this.setState({ loading: false, roomExists: false });
+        }
+      },
+    });
+  }
+
+  checkUser = () => {
+    const { userId, roomName } = this.props.params;
+    if (userId) {
+      this.ref.fetch(`rooms/${roomName}/users/${userId}`, {
+        context: this,
+        then: (user) => {
+          if (user) {
+            this.setState({ loading: false, userExists: true });
+          } else {
+            this.setState({ loading: false, userExists: false });
+          }
+        },
+      });
     } else {
-      this.setState({ roomExists: true });
-      if (!this.props.params.userId) {
-        this.createUserId();
-      } else {
-        this.ref.syncState(`rooms/${roomName}/users/${userId}/user`, {
-          context: this,
-          state: 'user',
-        });
-        this.setState({ loading: false });
-      }
+      this.createUserId();
     }
   }
 
-  changeName = (e) => {
-    this.setState({ user: { userName: e.target.value } });
-  }
 
   render() {
     const { roomName, userId } = this.props.params;
-    const { loading, roomExists } = this.state;
-    const { userName } = this.state.user;
+    const { loading, roomExists, userExists } = this.state;
 
     if (loading) {
       return (
@@ -93,17 +98,21 @@ export default class Room extends Component {
           </div>
         </div>
       );
+    } else if (roomExists && userExists) {
+      return (
+        <StudentView userId={userId} roomName={roomName} />
+      );
     } else if (roomExists) {
       return (
         <div className="container">
-          <div className="columns">
-            <div className="column col-12">
-              <input value={userName} type="text" placeholder="username" onChange={this.changeName} />
-            </div>
-          </div>
-          <div className="columns">
-            <div className="column col-12">
-              <Editor userId={userId} roomName={roomName} />
+          <div className="flex flex-center fill-page">
+            <div className="col-md-12 col-6">
+              <div className="empty">
+                <Icon name="warning" />
+                <p className="empty-title">Student not Found</p>
+                <p className="empty-meta">Hmmm, that's not good.</p>
+                <Link className="empty-action btn btn-primary" to="/">Go home</Link>
+              </div>
             </div>
           </div>
         </div>
@@ -116,7 +125,7 @@ export default class Room extends Component {
             <div className="empty">
               <Icon name="warning" />
               <p className="empty-title">Room not Found</p>
-              <p className="empty-meta">Hmmm, that's not good.</p>
+              <p className="empty-meta">We couldn't find the room, <b>{roomName}</b>.</p>
               <Link className="empty-action btn btn-primary" to="/">Go home</Link>
             </div>
           </div>
