@@ -21,10 +21,10 @@ export default class Home extends Component {
         <div className="container">
           <div className="columns">
             <div className="column col-12 text-center">
-              <h1>
-                Teaching!
-                <Icon name="group" />
-              </h1>
+              <a className="btn">Teaching! <Icon name="group" /></a><br /><br />
+              <a className="btn btn-link">Teaching! <Icon name="group" /></a><br /><br />
+              <a className="btn btn-primary">Teaching! <Icon name="group" /></a><br /><br />
+              <a className="btn btn-primary loading">Teaching! <Icon name="group" /></a>
             </div>
           </div>
         </div>
