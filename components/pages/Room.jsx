@@ -22,6 +22,7 @@ export default class Room extends Component {
     this.ref = Firebase.getFirebaseInstance();
 
     this.state = {
+      loading: true,
       roomExists: false,
       user: {
         userName: '',
@@ -75,44 +76,50 @@ export default class Room extends Component {
   }
 
   changeName = (e) => {
-    this.setState({
-      user: {
-        userName: e.target.value,
-      },
-    });
+    this.setState({ user: { userName: e.target.value } });
   }
 
   render() {
     const { roomName, userId } = this.props.params;
-    const { roomExists } = this.state;
+    const { loading, roomExists } = this.state;
     const { userName } = this.state.user;
+
+    if (loading) {
+      return (
+        <div className="container">
+          <div className="flex flex-center fill-page">
+            <span className="loading loading-lg" />
+          </div>
+        </div>
+      );
+    } else if (roomExists) {
+      return (
+        <div className="container">
+          <div className="columns">
+            <div className="column col-12">
+              <input value={userName} type="text" placeholder="username" onChange={this.changeName} />
+            </div>
+          </div>
+          <div className="columns">
+            <div className="column col-12">
+              <Editor userId={userId} roomName={roomName} />
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="container">
-        { roomExists ?
-          <div>
-            <div className="columns">
-              <div className="column col-12">
-                <input value={userName} type="text" placeholder="username" onChange={this.changeName} />
-              </div>
-            </div>
-            <div className="columns">
-              <div className="column col-12">
-                <Editor userId={userId} roomName={roomName} />
-              </div>
+        <div className="flex flex-center fill-page">
+          <div className="col-md-12 col-6">
+            <div className="empty">
+              <Icon name="warning" />
+              <p className="empty-title">Room not Found</p>
+              <p className="empty-meta">Hmmm, that's not good.</p>
+              <Link className="empty-action btn btn-primary" to="/">Go home</Link>
             </div>
           </div>
-        :
-          <div className="flex flex-center fill-page">
-            <div className="col-md-12 col-6">
-              <div className="empty">
-                <Icon name="warning" />
-                <p className="empty-title">Room not Found</p>
-                <p className="empty-meta">Hmmm, that's not good.</p>
-                <Link className="empty-action btn btn-primary" to="/">Go home</Link>
-              </div>
-            </div>
-          </div>
-        }
+        </div>
       </div>
     );
   }
