@@ -16,7 +16,6 @@ export default class Home extends Component {
     this.ref.syncState('rooms', {
       context: this,
       state: 'rooms',
-      asArray: true,
     });
     // Firebase.getRooms(this, this.setRooms);
     this.state = {
@@ -25,9 +24,9 @@ export default class Home extends Component {
     };
   }
 
-  setRooms = (data) => {
+  setRooms = () => {
     this.setState({
-      rooms: data,
+      [this.state.inputValue]: true,
     });
   }
 
@@ -40,7 +39,7 @@ export default class Home extends Component {
 
   checkName = (e) => {
     const inputValue = e.target.value;
-    const matches = this.state.rooms.filter((item) => item.key === inputValue);
+    const matches = Object.keys(this.state.rooms).filter((key) => key === inputValue);
     this.setState({
       isAvailable: matches.length === 0,
       inputValue,
@@ -98,8 +97,8 @@ export default class Home extends Component {
             <div className="row column col-6">
               <div className="flex-item">
                 {this.state.isAvailable ?
-                  <button className="btn btn-home input-group-btn" onChange={this.checkName}>Start Plz</button>
-                : <button className="btn btn-home input-group-btn" onChange={this.checkName} disabled>Start Plz</button>}
+                  <button className="btn btn-home input-group-btn" onChange={this.setRooms}>Start Plz</button>
+                : <button className="btn btn-home input-group-btn" onChange={this.setRooms} disabled>Start Plz</button>}
               </div>
             </div>
           </div>
