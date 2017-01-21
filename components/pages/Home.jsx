@@ -21,8 +21,25 @@ export default class Home extends Component {
   // static defaultProps = {
   // }
 
+  createRoom = () => {
+    const { roomName } = this.state;
+    this.ref.post(`rooms/${roomName}`, {
+      data: {
+        title: roomName,
+        users: {},
+      },
+    }).then(() => {
+      window.location.href += `teach/${roomName}`;
+    }).catch(err => {
+      // handle error
+      console.error(err);
+    });
+  }
+
   roomNameChange = (e) => {
     const val = e.target.value;
+    this.setState({ roomName: val });
+
     this.ref.fetch(`rooms/${val}`, {
       context: this,
       then: (room) => { this.setState({ isRoomNameAvailable: room == null }); },
@@ -31,7 +48,7 @@ export default class Home extends Component {
 
 
   render() {
-    const { isRoomNameAvailable } = this.state;
+    const { roomName, isRoomNameAvailable } = this.state;
     return (
       <div className="home">
 
@@ -69,7 +86,7 @@ export default class Home extends Component {
               <div className="flex-item">
                 <div className="input-group homeBox">
                   <span className="input-group-addon addon-lg">plzteach.me/room/</span>
-                  <input type="text" className="form-input input-lg homeInput" placeholder="Room Name" onChange={this.roomNameChange} />
+                  <input type="text" className="form-input input-lg homeInput" placeholder="Room Name" value={ roomName } onChange={this.roomNameChange} />
                 </div>
               </div>
             </div>
