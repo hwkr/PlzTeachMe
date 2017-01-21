@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import * as Firebase from 'functions/firebase';
 import uuidV4 from 'uuid/v4';
+import { Chance } from 'chance';
 
 import Icon from 'parts/Icon';
 
@@ -37,10 +38,11 @@ export default class Room extends Component {
   createUserId = () => {
     const { roomName } = this.props.params;
     const userId = uuidV4();
+    const chance = new Chance();
     this.ref.post(`rooms/${roomName}/users/${userId}`, {
       data: {
         user: {
-          userName: '',
+          userName: `${chance.first()} ${chance.last()}`,
         },
         editorContent: {
           html: '',
