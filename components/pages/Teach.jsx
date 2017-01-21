@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import ReactTooltip from 'react-tooltip';
 
 import Editor from 'editor/Editor';
 import Icon from 'parts/Icon';
@@ -59,9 +58,9 @@ export default class Home extends Component {
     const Sidebar = this.state.users != null ?
     Object.keys(this.state.users).map((user, index) =>
       <li key={index} className={classNames('tab-item', 'tab-student', { active: index === this.state.activeStudentIndex })} >
-        <button type="button" onClick={() => this.makeActive(index)} className="badge" data-badge="3">
+        <button onClick={() => this.makeActive(index)} className="badge" data-badge="3">
           <figure className="avatar avatar-md" data-initial="A">
-            <img src={avatarA} alt="avatar" data-tip="React-tooltip" />
+            <img src={avatarA} alt="avatar" />
           </figure>
         </button>
       </li>
@@ -69,7 +68,6 @@ export default class Home extends Component {
 
     return (
       <div className="teach">
-        <ReactTooltip place="right" />
         <div className="sidebar">
           <ul className="tab tab-side">
             <li className="tab-item tab-teacher">
