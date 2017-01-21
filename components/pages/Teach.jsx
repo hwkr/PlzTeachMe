@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Editor from 'editor/Editor';
 import Icon from 'parts/Icon';
 
 const avatarA = require('img/avatars/avatar-a.png');
@@ -61,11 +62,12 @@ export default class Home extends Component {
           </ul>
         </div>
         <main className="view">
-          <div className="container text-center">
-            <a className="btn">Teaching! <Icon name="group" /></a><br /><br />
-            <a className="btn btn-link">Teaching! <Icon name="group" /></a><br /><br />
-            <a className="btn btn-primary">Teaching! <Icon name="group" /></a><br /><br />
-            <a className="btn btn-primary loading">Teaching! <Icon name="group" /></a>
+          <div className="container">
+            <div className="columns">
+              <div className="column col-12">
+                <Editor />
+              </div>
+            </div>
           </div>
         </main>
       </div>

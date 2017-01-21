@@ -33,7 +33,7 @@ export default class TextEditor extends React.Component {
 
   render() {
     return (
-      <div className="codeEditor">
+      <div className="text-editor">
         <CodeMirror ref={this.editorRefCallback} value={this.state.code} onChange={this.updateCode} options={this.props} />
       </div>
     );

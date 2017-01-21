@@ -12,13 +12,13 @@ export default class Editor extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="editorContainer">
+      <div className="editor columns">
+        <div className="editor-text-editors column col-4">
           <TextEditor mode="html" />
           <TextEditor mode="css" />
           <TextEditor mode="javascript" />
         </div>
-        <div className="liveViewContainer">
+        <div className="editor-preview column col-8">
           <Preview />
         </div>
       </div>
