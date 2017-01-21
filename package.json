@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "An online teaching platform",
   "scripts": {
-    "start": "webpack -d --watch & live-server --entry-file=index.html",
+    "start": "webpack -d --watch & live-server --entry-file=404.html",
     "build": "webpack -p"
   },
   "repository": {
