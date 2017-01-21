@@ -2,8 +2,6 @@ import React, { Component, PropTypes } from 'react';
 
 import Head from 'parts/Head';
 
-import Config from 'Config';
-
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
