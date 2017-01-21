@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import * as Firebase from 'functions/firebase';
 import uuidV4 from 'uuid/v4';
+
+import Icon from 'parts/Icon';
 
 import Editor from 'components/editor/Editor';
 
@@ -14,28 +17,27 @@ export default class Room extends Component {
 
   constructor(props) {
     super(props);
-    const { roomName, userId } = this.props.params;
+    const { roomName } = this.props.params;
 
     this.ref = Firebase.getFirebaseInstance();
 
-    this.ref.syncState(`rooms/${roomName}/${userId}/user`, {
-      context: this,
-      state: 'user',
-    });
-
     this.state = {
+      roomExists: false,
       user: {
         userName: '',
       },
     };
 
-    if (!this.props.params.userId) this.createUserId();
+    this.ref.fetch(`rooms/${roomName}`, {
+      context: this,
+      then: this.isRoom,
+    });
   }
 
   createUserId = () => {
     const { roomName } = this.props.params;
     const userId = uuidV4();
-    this.ref.post(`rooms/${roomName}/${userId}`, {
+    this.ref.post(`rooms/${roomName}/users/${userId}`, {
       data: {
         user: {
           userName: '',
@@ -54,6 +56,24 @@ export default class Room extends Component {
     });
   }
 
+  isRoom = (room) => {
+    const { roomName, userId } = this.props.params;
+
+    if (!room) {
+      this.setState({ roomExists: false });
+    } else {
+      this.setState({ roomExists: true });
+      if (!this.props.params.userId) {
+        this.createUserId();
+      } else {
+        this.ref.syncState(`rooms/${roomName}/users/${userId}/user`, {
+          context: this,
+          state: 'user',
+        });
+      }
+    }
+  }
+
   changeName = (e) => {
     this.setState({
       user: {
@@ -64,19 +84,35 @@ export default class Room extends Component {
 
   render() {
     const { roomName, userId } = this.props.params;
+    const { roomExists } = this.state;
     const { userName } = this.state.user;
     return (
       <div className="container">
-        <div className="columns">
-          <div className="column col-12">
-            <input value={userName} type="text" placeholder="username" onChange={this.changeName} />
+        { roomExists ?
+          <div>
+            <div className="columns">
+              <div className="column col-12">
+                <input value={userName} type="text" placeholder="username" onChange={this.changeName} />
+              </div>
+            </div>
+            <div className="columns">
+              <div className="column col-12">
+                <Editor userId={userId} roomName={roomName} />
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="columns">
-          <div className="column col-12">
-            <Editor userId={userId} roomName={roomName} />
+        :
+          <div className="flex flex-center fill-page">
+            <div className="col-md-12 col-6">
+              <div className="empty">
+                <Icon name="warning" />
+                <p className="empty-title">Room not Found</p>
+                <p className="empty-meta">Hmmm, that's not good.</p>
+                <Link className="empty-action btn btn-primary" to="/">Go home</Link>
+              </div>
+            </div>
           </div>
-        </div>
+        }
       </div>
     );
   }

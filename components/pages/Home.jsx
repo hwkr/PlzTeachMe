@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 
-import Config from 'Config';
+// import Config from 'Config';
 
 import * as Firebase from 'functions/firebase';
-
-import Icon from 'parts/Icon';
 
 export default class Home extends Component {
   // static propTypes = {
@@ -13,42 +12,43 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.ref = Firebase.getFirebaseInstance();
-    this.ref.syncState('rooms', {
-      context: this,
-      state: 'rooms',
-      asArray: true,
-    });
-    // Firebase.getRooms(this, this.setRooms);
     this.state = {
-      isAvailable: true,
-      inputValue: '',
+      isRoomNameAvailable: false,
+      roomName: '',
     };
-  }
-
-  setRooms = (data) => {
-    this.setState({
-      rooms: data,
-    });
-  }
-
-  createRoom = () => {
-    Firebase.createRoom(this.state.inputValue);
   }
 
   // static defaultProps = {
   // }
 
-  checkName = (e) => {
-    const inputValue = e.target.value;
-    const matches = this.state.rooms.filter((item) => item.key === inputValue);
-    this.setState({
-      isAvailable: matches.length === 0,
-      inputValue,
+  createRoom = () => {
+    const { roomName } = this.state;
+    this.ref.post(`rooms/${roomName}`, {
+      data: {
+        title: roomName,
+        users: {},
+      },
+    }).then(() => {
+      window.location.href += `teach/${roomName}`;
+    }).catch(err => {
+      // handle error
+      console.error(err);
+    });
+  }
+
+  roomNameChange = (e) => {
+    const val = e.target.value;
+    this.setState({ roomName: val });
+
+    this.ref.fetch(`rooms/${val}`, {
+      context: this,
+      then: (room) => { this.setState({ isRoomNameAvailable: room == null }); },
     });
   }
 
 
   render() {
+    const { roomName, isRoomNameAvailable } = this.state;
     return (
       <div className="home">
 
@@ -89,10 +89,12 @@ export default class Home extends Component {
         {/* Input Bar */}
         <div className="container">
           <div className="columns">
-            <div className="column col-6">
-              <div className="input-group homeBox">
-                <span className="input-group-addon addon-lg">plzteach.me/room/</span>
-                <input type="text" className="form-input input-lg homeInput" placeholder="site name" onChange={this.checkName} />
+            <div className="row column col-6">
+              <div className="flex-item">
+                <div className="input-group homeBox">
+                  <span className="input-group-addon addon-lg">plzteach.me/room/</span>
+                  <input type="text" className="form-input input-lg homeInput" placeholder="Room Name" value={ roomName } onChange={this.roomNameChange} />
+                </div>
               </div>
             </div>
           </div>

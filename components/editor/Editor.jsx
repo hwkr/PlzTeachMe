@@ -28,7 +28,7 @@ export default class Editor extends React.Component {
     super(props);
     this.ref = Firebase.getFirebaseInstance();
 
-    this.ref.syncState(`rooms/${this.props.roomName}/${this.props.userId}/editorContent`, {
+    this.ref.syncState(`rooms/${this.props.roomName}/users/${this.props.userId}/editorContent`, {
       context: this,
       state: 'content',
     });

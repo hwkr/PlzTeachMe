@@ -5,6 +5,7 @@ const icons = [
   'icons/social-facebook.svg',
   'icons/social-twitter.svg',
   'icons/social-github.svg',
+  'icons/warning.svg',
 ];
 
 module.exports = {
