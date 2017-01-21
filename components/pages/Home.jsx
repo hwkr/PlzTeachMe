@@ -3,6 +3,8 @@ import classnames from 'classnames';
 
 // import Config from 'Config';
 
+import Icon from 'parts/Icon';
+
 import * as Firebase from 'functions/firebase';
 
 export default class Home extends Component {
