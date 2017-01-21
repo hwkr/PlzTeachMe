@@ -1,11 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import React from 'react';
+import Pad from 'components/Pad';
 
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    children: PropTypes.element,
-  };
-
+export default class Room extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +11,7 @@ export default class ExampleComponent extends Component {
   render() {
     return (
       <div>
-        Hello
+        <Pad />
       </div>
     );
   }

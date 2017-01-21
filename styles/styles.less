@@ -1,5 +1,8 @@
 /*! Styles for Hawker.me | github.com/hwkr */
 
+// Dependencies
+@import (inline) "../node_modules/codemirror/lib/codemirror.css";
+
 // Reset default browser styles using Normalize
 @import "base/normalize";
 
@@ -34,6 +37,11 @@
 
 // Import page specific styles
 @import "pages/home";
+
+// Import custom component styles
+@import "components/Rooms";
+@import "components/Editor";
+@import "components/LiveView";
 
 // Import part specific styles
 
