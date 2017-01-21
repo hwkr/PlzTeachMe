@@ -23,14 +23,29 @@ export default class Home extends Component {
         <div className="container">
           <div className="columns">
             <div className="column col-12 text-center">
-              <h1>
+              <h1 className="homeTitle">
                 Welcome    
               </h1>
             </div>
-            <div className="column col-4">
-              <div className="input-group">
-                  <span className="input-group-addon">plzteach.me/room/</span>
-                  <input type="text" className="form-input" placeholder="site name" />
+          </div>
+        </div>
+        <div className="flex-container container">
+          <div className="columns">
+            <div className="row column col-6">
+              <div className="flex-item">
+                <div className="input-group">
+                  <span className="input-group-addon addon-lg">plzteach.me/room/</span>
+                  <input type="text" className="form-input input-lg homeInput" placeholder="site name" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex-container container">
+          <div className="columns">
+            <div className="row column col-6">
+              <div className="flex-item">
+                <button className="btn btn-home input-group-btn">Start Plz</button>
               </div>
             </div>
           </div>
