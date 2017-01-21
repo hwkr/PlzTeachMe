@@ -13,7 +13,7 @@ export default class ExampleComponent extends Component {
 
   render() {
     return (
-      <div>
+      <div className="liveView">
         Hello
       </div>
     );

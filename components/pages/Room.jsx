@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Editor from '../Editor';
+import LiveView from '../LiveView';
 
 export default class ExampleComponent extends Component {
   static propTypes = {
@@ -15,13 +16,17 @@ export default class ExampleComponent extends Component {
   render() {
     const baseOptions = {
       lineNumbers: true,
-      width: '30%',
     };
     return (
       <div>
-        <Editor options={Object.assign({ mode: 'html' }, baseOptions)} />
-        <Editor options={Object.assign({ mode: 'css' }, baseOptions)} />
-        <Editor options={Object.assign({ mode: 'javascript' }, baseOptions)} />
+        <div className="editorContainer">
+          <Editor options={Object.assign({ mode: 'html' }, baseOptions)} />
+          <Editor options={Object.assign({ mode: 'css' }, baseOptions)} />
+          <Editor options={Object.assign({ mode: 'javascript' }, baseOptions)} />
+        </div>
+        <div className="liveViewContainer">
+          <LiveView />
+        </div>
       </div>
     );
   }

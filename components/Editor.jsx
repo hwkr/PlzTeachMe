@@ -9,12 +9,13 @@ export default class ExampleComponent extends Component {
       height: PropTypes.string,
       editorType: PropTypes.string,
       lineNumbers: PropTypes.bool,
+      mode: 'html' | 'css' | 'javascript',
     }),
   };
 
 
   state = {
-    code: '// Code',
+    code: `// ${this.props.options.mode}`,
   }
 
   editorRefCallback = (ref) => {
