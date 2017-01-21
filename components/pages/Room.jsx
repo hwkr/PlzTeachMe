@@ -66,9 +66,17 @@ export default class Room extends Component {
     const { roomName, userId } = this.props.params;
     const { userName } = this.state.user;
     return (
-      <div>
-        <input value={userName} type="text" placeholder="username" onChange={this.changeName} />
-        <Editor userId={userId} roomName={roomName} />
+      <div className="container">
+        <div className="columns">
+          <div className="column col-12">
+            <input value={userName} type="text" placeholder="username" onChange={this.changeName} />
+          </div>
+        </div>
+        <div className="columns">
+          <div className="column col-12">
+            <Editor userId={userId} roomName={roomName} />
+          </div>
+        </div>
       </div>
     );
   }

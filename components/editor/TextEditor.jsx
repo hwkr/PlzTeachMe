@@ -26,7 +26,7 @@ export default class TextEditor extends React.Component {
   render() {
     return (
       <div className="text-editor">
-        <div>{this.props.mode}</div>
+        <h4 className="editor-title">{this.props.mode}</h4>
         <CodeMirror ref={this.editorRefCallback} value={this.props.content} onChange={this.props.onChange} options={this.props} />
       </div>
     );
