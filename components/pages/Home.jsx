@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import Config from 'Config';
 
+import * as Firebase from 'functions/firebase';
+
 import Icon from 'parts/Icon';
 
 export default class Home extends Component {
@@ -10,12 +12,41 @@ export default class Home extends Component {
 
   constructor(props) {
     super(props);
+    this.ref = Firebase.getFirebaseInstance();
+    this.ref.syncState('rooms', {
+      context: this,
+      state: 'rooms',
+      asArray: true,
+    });
+    // Firebase.getRooms(this, this.setRooms);
     this.state = {
+      isAvailable: true,
+      inputValue: '',
     };
+  }
+
+  setRooms = (data) => {
+    this.setState({
+      rooms: data,
+    });
+  }
+
+  createRoom = () => {
+    Firebase.createRoom(this.state.inputValue);
   }
 
   // static defaultProps = {
   // }
+
+  checkName = (e) => {
+    const inputValue = e.target.value;
+    const matches = this.state.rooms.filter((item) => item.key === inputValue);
+    this.setState({
+      isAvailable: matches.length === 0,
+      inputValue,
+    });
+  }
+
 
   render() {
     return (
@@ -23,9 +54,9 @@ export default class Home extends Component {
 
         <header className="navbar">
           <section className="navbar-section">
-              <a href="#" className="navbar-brand">
-                  <img className="brandLogo" src="../../img/logo/logoFull.svg" alt="Branc Logo"/>
-              </a>
+            <a href="#" className="navbar-brand">
+              <img className="brandLogo" src="../../img/logo/logoFull.svg" alt="Branc Logo"/>
+            </a>
           </section>
           <section>
             <a href="#" target="_blank">
@@ -43,7 +74,7 @@ export default class Home extends Component {
           <div className="columns">
             <div className="column col-12 text-center">
               <h1 className="homeTitle">
-                Welcome    
+                Welcome
               </h1>
             </div>
           </div>
@@ -55,7 +86,7 @@ export default class Home extends Component {
               <div className="flex-item">
                 <div className="input-group homeBox">
                   <span className="input-group-addon addon-lg">plzteach.me/room/</span>
-                  <input type="text" className="form-input input-lg homeInput" placeholder="site name" />
+                  <input type="text" className="form-input input-lg homeInput" placeholder="site name" onChange={this.checkName} />
                 </div>
               </div>
             </div>
@@ -66,13 +97,16 @@ export default class Home extends Component {
           <div className="columns">
             <div className="row column col-6">
               <div className="flex-item">
-                <button className="btn btn-home input-group-btn">Start Plz</button>
+                {this.state.isAvailable ?
+                  <button className="btn btn-home input-group-btn" onChange={this.checkName}>Start Plz</button>
+                : <button className="btn btn-home input-group-btn" onChange={this.checkName} disabled>Start Plz</button>}
               </div>
             </div>
           </div>
         </div>
-
       </div>
     );
   }
 }
+
+

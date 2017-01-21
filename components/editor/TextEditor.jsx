@@ -8,14 +8,16 @@ export default class TextEditor extends React.Component {
     editorType: PropTypes.string,
     lineNumbers: PropTypes.bool,
     mode: PropTypes.string,
+    onChange: PropTypes.func,
+    content: PropTypes.shape({
+      html: PropTypes.string,
+      css: PropTypes.string,
+      javascript: PropTypes.string,
+    }),
   };
 
   static defaultProps = {
     lineNumbers: true,
-  }
-
-  state = {
-    code: `// ${this.props.mode}`,
   }
 
   editorRefCallback = (ref) => {
@@ -25,16 +27,11 @@ export default class TextEditor extends React.Component {
     cm.setSize(width, height);
   }
 
-  updateCode = (newCode) => {
-    this.setState({
-      code: newCode,
-    });
-  }
-
   render() {
     return (
       <div className="codeEditor">
-        <CodeMirror ref={this.editorRefCallback} value={this.state.code} onChange={this.updateCode} options={this.props} />
+        <div>{this.props.mode}</div>
+        <CodeMirror ref={this.editorRefCallback} value={this.props.content} onChange={this.props.onChange} options={this.props} />
       </div>
     );
   }
