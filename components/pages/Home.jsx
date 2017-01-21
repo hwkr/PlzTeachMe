@@ -52,23 +52,30 @@ export default class Home extends Component {
     return (
       <div className="home">
 
+        {/* Header */}
         <header className="navbar">
           <section className="navbar-section">
             <a href="#" className="navbar-brand">
               <img className="brandLogo" src="../../img/logo/logoFull.svg" alt="Branc Logo"/>
             </a>
           </section>
-          <section>
-            <a href="#" target="_blank">
-              <Icon name="group" />
-            </a>
-            <a href="#" target="_blank">
-              <i></i>
-            </a>
+          <section className="navbar-section">
+            <div className="input-group input-inline">
+              <a className="btn btn-link" href="#" target="_blank">
+                <Icon name="social-facebook"/>
+                Facebook
+              </a>
+              <a className="btn btn-link" href="#" target="_blank">
+                <Icon name="social-twitter"/>
+                Twitter
+              </a>
+              <a className="btn btn-link" href="#" target="_blank">
+                <Icon name="social-github"/>
+                Github
+              </a>
+            </div>
           </section>
         </header>
-
-
         {/* Welcome Message */}
         <div className="container">
           <div className="columns">
@@ -80,27 +87,23 @@ export default class Home extends Component {
           </div>
         </div>
         {/* Input Bar */}
-        <div className="flex-container container">
+        <div className="container">
           <div className="columns">
-            <div className="row column col-6">
-              <div className="flex-item">
-                <div className="input-group homeBox">
-                  <span className="input-group-addon addon-lg">plzteach.me/room/</span>
-                  <input type="text" className="form-input input-lg homeInput" placeholder="site name" onChange={this.checkName} />
-                </div>
+            <div className="column col-6">
+              <div className="input-group homeBox">
+                <span className="input-group-addon addon-lg">plzteach.me/room/</span>
+                <input type="text" className="form-input input-lg homeInput" placeholder="site name" onChange={this.checkName} />
               </div>
             </div>
           </div>
         </div>
         {/* Start Plz Button */}
-        <div className="flex-container container">
+        <div className="container">
           <div className="columns">
-            <div className="row column col-6">
-              <div className="flex-item">
-                {this.state.isAvailable ?
-                  <button className="btn btn-home input-group-btn" onChange={this.checkName}>Start Plz</button>
-                : <button className="btn btn-home input-group-btn" onChange={this.checkName} disabled>Start Plz</button>}
-              </div>
+            <div className="column col-6">
+              {this.state.isAvailable ?
+                <button className="btn btn-home input-group-btn" onChange={this.checkName}>Start Plz</button>
+              : <button className="btn btn-home input-group-btn" onChange={this.checkName} disabled>Start Plz</button>}
             </div>
           </div>
         </div>
