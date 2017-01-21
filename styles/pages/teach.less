@@ -18,15 +18,37 @@
         border-radius: @border-radius 0 0 @border-radius;
 
         border-left: none;
-        background: @body-bg;
+        background-color: darken(@body-bg, 2%);
+
+        &.tab-teacher {
+          margin-bottom: @layout-margin*2;
+          .icon {
+            font-size: 1.8*@body-font-size;
+          }
+        }
+
+        &.tab-student {
+          .avatar {
+            background-color: @control-color;
+          }
+        }
+
+        &.active {
+          background-color: @body-bg;
+        }
 
         a {
           margin-left: 0;
+          opacity: 0.8;
           padding: @layout-padding/2;
-        }
 
-        .avatar {
-          background-color: @control-color;
+          &:hover {
+            opacity: 1;
+          }
+        }
+        &.active a,
+        a.active {
+          opacity: 1;
         }
       }
     }

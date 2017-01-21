@@ -17,7 +17,7 @@ export default class Footer extends Component {
 
   render() {
     return (
-      <i className={`plz plz-${this.props.name}`} style={{ fontSize: `${this.props.size}em` }} />
+      <i className={`icon plz plz-${this.props.name}`} style={{ fontSize: `${this.props.size}em` }} />
     );
   }
 }
