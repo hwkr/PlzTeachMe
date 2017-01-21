@@ -6,8 +6,8 @@ import 'current-input';
 import ReactGA from 'react-ga';
 
 import Config from 'Config';
-
 /*
+
     Pages
 */
 
@@ -25,7 +25,6 @@ import 'styles/styles.less';
 import 'font/iconsplz.font';
 
 ReactGA.initialize(Config.tracking_id);
-
 
 const routes = (
   <Route path="/" mapMenuTitle="Home" component={App}>
