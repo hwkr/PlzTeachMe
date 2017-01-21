@@ -7,25 +7,32 @@ import ReactGA from 'react-ga';
 
 import Config from 'Config';
 
+/*
+    Pages
+*/
+
 import App from 'App';
 import Home from 'pages/Home';
 import PageNotFound from 'pages/PageNotFound';
+
 import ExampleComponent from 'pages/ExampleComponent';
 import ExampleTwoDeepComponent from 'pages/ExampleTwoDeepComponent';
 
+import 'file-loader?name=page.js!page.js';
 import 'styles/styles.less';
 import 'font/iconsplz.font';
 
 ReactGA.initialize(Config.tracking_id);
+
 
 const routes = (
   <Route path="/" mapMenuTitle="Home" component={App}>
     <IndexRoute component={Home} />
 
     <Route path="example" mapMenuTitle="Example" component={ExampleComponent}>
+      <Route path="example" mapMenuTitle="Two Deep" component={ExampleComponent} />
       <Route path="two-deep" mapMenuTitle="Two Deep" component={ExampleTwoDeepComponent} />
     </Route>
-
     <Route path="*" mapMenuTitle="Page Not Found" component={PageNotFound} />
   </Route>
 );

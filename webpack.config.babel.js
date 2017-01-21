@@ -105,7 +105,9 @@ export default {
       links: [
       ],
       inlineManifestWebpackName: 'webpackManifest',
-      scripts: [/* Path to Script */],
+      scripts: [
+        '/dist/page.js',
+      ],
     }),
   ].concat(
     production ? [
