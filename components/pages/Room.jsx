@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import * as Firebase from 'functions/firebase';
 import uuidV4 from 'uuid/v4';
 

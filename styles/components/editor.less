@@ -8,11 +8,20 @@
     .column {
         padding: 0;
     }
-    .editor-text-editor {
-
+    .editor-text-editors {
+        .text-editor {
+            border-bottom: .1rem solid @core-border-color;
+            .editor-title {
+                margin: 0;
+                padding: @layout-padding/4 @layout-padding/2;
+                font-size: @body-font-size;
+                border-bottom: .1rem solid @core-border-color;
+            }
+        }
     }
     .editor-preview {
     border-left: .1rem solid @core-border-color;
+    background-color: @grey-white;
         iframe {
             height: 100%;
             width: 100%;
@@ -20,11 +29,4 @@
     }
 }
 
-.text-editor {
-    .editor-title {
-        margin: 0;
-        padding: @layout-padding/4 @layout-padding/2;
-        font-size: @body-font-size;
-        border-bottom: .1rem solid @core-border-color;
-    }
-}
+
