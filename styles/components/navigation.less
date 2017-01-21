@@ -99,6 +99,14 @@
       a.active {
         border-left-color: darken(@core-color, 10%);
       }
+
+      .badge {
+        &[data-badge]::after {
+          right: -0.2rem;
+          top: 1.6rem;
+          z-index: 100;
+        }
+      }
     }
   }
 }

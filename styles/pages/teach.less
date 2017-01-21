@@ -5,8 +5,31 @@
     width: @sidebar-width;
     height: 100vh;
 
-    padding: @layout-padding/2;
+    padding-left: @layout-padding/2;
+    padding-top: @layout-padding/2;
+    padding-bottom: @layout-padding/2;
     background: @html-bg;
+
+    .tab-side {
+      .tab-item {
+        margin-bottom: @layout-margin/2;
+
+        overflow: hidden;
+        border-radius: @border-radius 0 0 @border-radius;
+
+        border-left: none;
+        background: @body-bg;
+
+        a {
+          margin-left: 0;
+          padding: @layout-padding/2;
+        }
+
+        .avatar {
+          background-color: @control-color;
+        }
+      }
+    }
   }
 
   .view {

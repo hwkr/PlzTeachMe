@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 
 import Icon from 'parts/Icon';
 
+const avatarA = require('img/avatars/avatar-a.png');
+const avatarB = require('img/avatars/avatar-b.png');
+const avatarC = require('img/avatars/avatar-c.png');
+const avatarD = require('img/avatars/avatar-d.png');
+
 export default class Home extends Component {
   // static propTypes = {
   // }
@@ -20,17 +25,31 @@ export default class Home extends Component {
       <div className="teach">
         <div className="sidebar">
           <ul className="tab tab-side">
+            <li className="tab-item">
+              <a href="#a" className="badge" data-badge="3">
+                <figure className="avatar avatar-md" data-initial="A">
+                  <img src={avatarA} alt="avatar" />
+                </figure>
+              </a>
+            </li>
             <li className="tab-item active">
-              <a href="#a">A</a>
+              <a href="#b">
+                <figure className="avatar avatar-md" data-initial="B">
+                  <img src={avatarB} alt="avatar" />
+                </figure>
+              </a>
             </li>
             <li className="tab-item">
-              <a href="#b">B</a>
+              <a href="#c" className="badge" data-badge="1">
+                <figure className="avatar avatar-md" data-initial="C" />
+              </a>
             </li>
             <li className="tab-item">
-              <a href="#c">C</a>
-            </li>
-            <li className="tab-item">
-              <a href="#d">D</a>
+              <a href="#d">
+                <figure className="avatar avatar-md" data-initial="D">
+                  <img src={avatarD} alt="avatar" />
+                </figure>
+              </a>
             </li>
           </ul>
         </div>
