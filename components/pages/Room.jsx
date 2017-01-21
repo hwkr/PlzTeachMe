@@ -1,5 +1,5 @@
 import React from 'react';
-import Pad from 'components/Pad';
+import Editor from 'components/editor/Editor';
 
 export default class Room extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ export default class Room extends React.Component {
   render() {
     return (
       <div>
-        <Pad />
+        <Editor />
       </div>
     );
   }
