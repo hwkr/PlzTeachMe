@@ -4,9 +4,14 @@ import CodeMirror from 'react-codemirror';
 export default class ExampleComponent extends Component {
   static propTypes = {
     children: PropTypes.element,
-    width: PropTypes.string,
-    height: PropTypes.string,
+    options: PropTypes.shape({
+      width: PropTypes.string,
+      height: PropTypes.string,
+      editorType: PropTypes.string,
+      lineNumbers: PropTypes.bool,
+    }),
   };
+
 
   state = {
     code: '// Code',
@@ -14,7 +19,7 @@ export default class ExampleComponent extends Component {
 
   editorRefCallback = (ref) => {
     const cm = ref.getCodeMirror();
-    const { width, height } = this.props;
+    const { width, height } = this.props.options;
     // set width & height
     cm.setSize(width, height);
   }
@@ -26,15 +31,9 @@ export default class ExampleComponent extends Component {
   }
 
   render() {
-    const options = {
-      lineNumbers: true,
-      width: '100px',
-      height: '100px',
-    };
-
     return (
       <div className="CodeMirrorComponent">
-        <CodeMirror ref={this.editorRefCallback}value={this.state.code} onChange={this.updateCode} options={options} />
+        <CodeMirror ref={this.editorRefCallback} value={this.state.code} onChange={this.updateCode} options={this.props.options} />
       </div>
     );
   }

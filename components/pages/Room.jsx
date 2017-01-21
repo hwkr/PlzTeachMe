@@ -13,9 +13,14 @@ export default class ExampleComponent extends Component {
   }
 
   render() {
+    const options = {
+      type: 'javascript',
+      width: '100px',
+      height: '100px',
+    };
     return (
       <div>
-        <Editor width="100px" height="100px" />
+        <Editor options={options} />
       </div>
     );
   }
