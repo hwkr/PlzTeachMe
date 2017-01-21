@@ -1,5 +1,6 @@
 const icons = [
   'icons/heart.svg',
+  'icons/group.svg',
 ];
 
 module.exports = {
@@ -7,8 +8,8 @@ module.exports = {
     ...icons,
   ],
   fontName: 'IconsPlz',
-  classPrefix: 'ip-',
-  baseClass: 'ip',
+  classPrefix: 'plz-',
+  baseClass: 'plz',
   fixedWidth: true,
   types: ['eot', 'woff', 'ttf'],
   cssTemplate: 'templates/less.hbs',
