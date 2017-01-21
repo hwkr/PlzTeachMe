@@ -1,9 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import CodeMirror from 'react-codemirror';
 
-export default class ExampleComponent extends Component {
+export default class Editor extends React.Component {
   static propTypes = {
-    children: PropTypes.element,
     options: PropTypes.shape({
       width: PropTypes.string,
       height: PropTypes.string,
