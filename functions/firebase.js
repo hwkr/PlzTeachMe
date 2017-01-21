@@ -10,27 +10,6 @@ const firebaseConfig = {
 
 const ref = Rebase.createClass(firebaseConfig);
 
-export function createRoom(roomName, callback) {
-  return ref.push(`rooms/${roomName}`, {
-    data: { name: roomName },
-  }).then(() => {
-    console.log('Room Created');
-    callback();
-  }).catch(err => {
-    // handle error
-    console.log(err);
-  });
-}
-
-export function getRooms(context, callback) {
-  ref.fetch('rooms', {
-    context,
-    then(data) {
-      callback(data);
-    },
-  });
-}
-
 export function getFirebaseInstance() {
   return ref;
 }

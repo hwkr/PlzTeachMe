@@ -1,8 +1,30 @@
-.codeEditor {
-    border: 1px solid black;
-    margin: 5px;
+.editor {
+    margin: 0;
+
+    border: .1rem solid @core-border-color;
+    border-radius: @border-radius;
+    overflow: hidden;
+
+    .column {
+        padding: 0;
+    }
+    .editor-text-editor {
+
+    }
+    .editor-preview {
+    border-left: .1rem solid @core-border-color;
+        iframe {
+            height: 100%;
+            width: 100%;
+        }
+    }
 }
 
-.liveViewContainer {
-    margin: 25px 15px 15px 15px;
+.text-editor {
+    .editor-title {
+        margin: 0;
+        padding: @layout-padding/4 @layout-padding/2;
+        font-size: @body-font-size;
+        border-bottom: .1rem solid @core-border-color;
+    }
 }

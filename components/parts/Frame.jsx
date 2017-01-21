@@ -1,0 +1,36 @@
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+
+const Frame = (ComposedComponent) => class extends Component {
+  static propTypes = {
+    frameProps: React.PropTypes.object,
+  }
+
+  static defaultProps = {
+    frameProps: {
+      frameBorder: 0,
+    },
+  }
+
+  updateIFrameContents = () => {
+    ReactDOM.render((
+      <ComposedComponent {...this.props} />
+    ), this.el);
+  }
+
+  render = () => <iframe {...this.props.frameProps} />;
+
+  componentDidMount = () => {
+    const frameBody = ReactDOM.findDOMNode(this).contentDocument.body; //eslint-disable-line
+    const el = document.createElement('div');
+    frameBody.appendChild(el);
+    this.el = el;
+    this.updateIFrameContents();
+  }
+
+  componentDidUpdate = () => {
+    this.updateIFrameContents();
+  }
+};
+
+export default Frame;
