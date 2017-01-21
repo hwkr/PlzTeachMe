@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 
-import Config from 'Config';
+// import Config from 'Config';
 
 import * as Firebase from 'functions/firebase';
-
-import Icon from 'parts/Icon';
 
 export default class Home extends Component {
   // static propTypes = {
@@ -13,42 +12,26 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.ref = Firebase.getFirebaseInstance();
-    this.ref.syncState('rooms', {
-      context: this,
-      state: 'rooms',
-      asArray: true,
-    });
-    // Firebase.getRooms(this, this.setRooms);
     this.state = {
-      isAvailable: true,
-      inputValue: '',
+      isRoomNameAvailable: false,
+      roomName: '',
     };
-  }
-
-  setRooms = (data) => {
-    this.setState({
-      rooms: data,
-    });
-  }
-
-  createRoom = () => {
-    Firebase.createRoom(this.state.inputValue);
   }
 
   // static defaultProps = {
   // }
 
-  checkName = (e) => {
-    const inputValue = e.target.value;
-    const matches = this.state.rooms.filter((item) => item.key === inputValue);
-    this.setState({
-      isAvailable: matches.length === 0,
-      inputValue,
+  roomNameChange = (e) => {
+    const val = e.target.value;
+    this.ref.fetch(`rooms/${val}`, {
+      context: this,
+      then: (room) => { this.setState({ isRoomNameAvailable: room == null }); },
     });
   }
 
 
   render() {
+    const { isRoomNameAvailable } = this.state;
     return (
       <div className="home">
 
@@ -86,7 +69,7 @@ export default class Home extends Component {
               <div className="flex-item">
                 <div className="input-group homeBox">
                   <span className="input-group-addon addon-lg">plzteach.me/room/</span>
-                  <input type="text" className="form-input input-lg homeInput" placeholder="site name" onChange={this.checkName} />
+                  <input type="text" className="form-input input-lg homeInput" placeholder="Room Name" onChange={this.roomNameChange} />
                 </div>
               </div>
             </div>
@@ -97,9 +80,7 @@ export default class Home extends Component {
           <div className="columns">
             <div className="row column col-6">
               <div className="flex-item">
-                {this.state.isAvailable ?
-                  <button className="btn btn-home input-group-btn" onChange={this.checkName}>Start Plz</button>
-                : <button className="btn btn-home input-group-btn" onChange={this.checkName} disabled>Start Plz</button>}
+                <button className={classnames('btn', 'btn-home', 'input-group-btn', { disabled: !isRoomNameAvailable })} onClick={this.createRoom}>Start Plz</button>
               </div>
             </div>
           </div>

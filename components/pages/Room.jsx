@@ -37,7 +37,7 @@ export default class Room extends Component {
   createUserId = () => {
     const { roomName } = this.props.params;
     const userId = uuidV4();
-    this.ref.post(`rooms/${roomName}/${userId}`, {
+    this.ref.post(`rooms/${roomName}/users/${userId}`, {
       data: {
         user: {
           userName: '',
@@ -66,7 +66,7 @@ export default class Room extends Component {
       if (!this.props.params.userId) {
         this.createUserId();
       } else {
-        this.ref.syncState(`rooms/${roomName}/${userId}/user`, {
+        this.ref.syncState(`rooms/${roomName}/users/${userId}/user`, {
           context: this,
           state: 'user',
         });
