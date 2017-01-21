@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import Editor from '../Editor';
 
 export default class ExampleComponent extends Component {
   static propTypes = {
@@ -15,7 +14,7 @@ export default class ExampleComponent extends Component {
   render() {
     return (
       <div>
-        <Editor />
+        Hello
       </div>
     );
   }
