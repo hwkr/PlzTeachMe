@@ -14,7 +14,6 @@ export default class Editor extends React.Component {
     lineNumbers: true,
   }
 
-
   state = {
     code: `// ${this.props.mode}`,
   }
