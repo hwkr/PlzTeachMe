@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 
 import * as Firebase from 'functions/firebase';
 
+import Icon from 'parts/Icon';
+
 import TextEditor from './TextEditor';
 import Preview from './Preview';
 
@@ -30,6 +32,7 @@ export default class Editor extends React.Component {
       state: 'content',
     });
     this.state = {
+      loading: false,
       content: {
         html: '',
         css: '',
@@ -95,15 +98,28 @@ export default class Editor extends React.Component {
   }
 
   render() {
+    const { loading, content } = this.state;
     return (
       <div className="editor columns">
         <div className="editor-text-editors column col-4">
-          <TextEditor mode="html" content={this.state.content.html} onChange={this.setHtml} />
-          <TextEditor mode="css" content={this.state.content.css} onChange={this.setCss} />
-          <TextEditor mode="javascript" content={this.state.content.javascript} onChange={this.setJavascript} />
+          <TextEditor mode="html" content={content.html} onChange={this.setHtml} />
+          <TextEditor mode="css" content={content.css} onChange={this.setCss} />
+          <TextEditor mode="javascript" content={content.javascript} onChange={this.setJavascript} />
         </div>
         <div className="editor-preview column col-8">
-          <Preview content={generateCombinedHtml(this.state.content)} />
+          { loading ?
+            <div className="empty">
+              <Icon name="flash" />
+              <p className="empty-title">Preview Loading</p>
+              <p className="empty-meta"><span className="loading">Loading...</span></p>
+            </div>
+            :
+            <Preview content={generateCombinedHtml(content)} />
+          }
+
+
+
+
         </div>
       </div>
     );
