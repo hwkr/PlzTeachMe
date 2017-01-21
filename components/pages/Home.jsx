@@ -29,7 +29,7 @@ export default class Home extends Component {
           </section>
           <section>
             <a href="#" target="_blank">
-              <i></i>
+              <Icon name="group" />
             </a>
             <a href="#" target="_blank">
               <i></i>
