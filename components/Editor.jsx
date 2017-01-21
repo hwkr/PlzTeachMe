@@ -3,23 +3,25 @@ import CodeMirror from 'react-codemirror';
 
 export default class Editor extends React.Component {
   static propTypes = {
-    options: PropTypes.shape({
-      width: PropTypes.string,
-      height: PropTypes.string,
-      editorType: PropTypes.string,
-      lineNumbers: PropTypes.bool,
-      mode: 'html' | 'css' | 'javascript',
-    }),
+    width: PropTypes.string,
+    height: PropTypes.string,
+    editorType: PropTypes.string,
+    lineNumbers: PropTypes.bool,
+    mode: 'html' | 'css' | 'javascript',
   };
+
+  static defaultProps = {
+    lineNumbers: true,
+  }
 
 
   state = {
-    code: `// ${this.props.options.mode}`,
+    code: `// ${this.props.mode}`,
   }
 
   editorRefCallback = (ref) => {
     const cm = ref.getCodeMirror();
-    const { width, height } = this.props.options;
+    const { width, height } = this.props;
     // set width & height
     cm.setSize(width, height);
   }
@@ -33,7 +35,7 @@ export default class Editor extends React.Component {
   render() {
     return (
       <div className="codeEditor">
-        <CodeMirror ref={this.editorRefCallback} value={this.state.code} onChange={this.updateCode} options={this.props.options} />
+        <CodeMirror ref={this.editorRefCallback} value={this.state.code} onChange={this.updateCode} options={this.props} />
       </div>
     );
   }
