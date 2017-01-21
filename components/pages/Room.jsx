@@ -71,6 +71,7 @@ export default class Room extends Component {
           context: this,
           state: 'user',
         });
+        this.setState({ loading: false });
       }
     }
   }
