@@ -8,6 +8,7 @@ export default class TextEditor extends React.Component {
     editorType: PropTypes.string,
     lineNumbers: PropTypes.bool,
     mode: PropTypes.string,
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {
@@ -34,7 +35,7 @@ export default class TextEditor extends React.Component {
   render() {
     return (
       <div className="codeEditor">
-        <CodeMirror ref={this.editorRefCallback} value={this.state.code} onChange={this.updateCode} options={this.props} />
+        <CodeMirror ref={this.editorRefCallback} value={this.props.content} onChange={this.props.onChange} options={this.props} />
       </div>
     );
   }
