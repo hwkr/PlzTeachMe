@@ -14,7 +14,14 @@ export default class Room extends Component {
 
   constructor(props) {
     super(props);
+    const { roomName, userId } = this.props.params;
+
     this.ref = Firebase.getFirebaseInstance();
+
+    this.ref.syncState(`rooms/${roomName}/${userId}/user`, {
+      context: this,
+      state: 'user',
+    });
 
     this.state = {
       user: {
@@ -49,13 +56,15 @@ export default class Room extends Component {
 
   changeName = (e) => {
     this.setState({
-      userName: e.target.value,
+      user: {
+        userName: e.target.value,
+      },
     });
   }
 
   render() {
     const { roomName, userId } = this.props.params;
-    const { userName } = this.state;
+    const { userName } = this.state.user;
     return (
       <div>
         <input value={userName} type="text" placeholder="username" onChange={this.changeName} />
