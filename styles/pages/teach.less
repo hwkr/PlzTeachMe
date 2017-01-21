@@ -37,7 +37,7 @@
           background-color: @body-bg;
         }
 
-        a {
+        a, button {
           margin-left: 0;
           opacity: 0.8;
           padding: @layout-padding/2;
@@ -47,7 +47,9 @@
           }
         }
         &.active a,
-        a.active {
+        &.active button,
+        a.active,
+        button.active {
           opacity: 1;
         }
       }

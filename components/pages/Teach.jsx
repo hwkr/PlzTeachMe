@@ -1,7 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
+import ReactTooltip from 'react-tooltip';
 
 import Editor from 'editor/Editor';
 import Icon from 'parts/Icon';
+
+import * as Firebase from 'functions/firebase';
 
 const avatarA = require('img/avatars/avatar-a.png');
 const avatarB = require('img/avatars/avatar-b.png');
@@ -9,21 +13,63 @@ const avatarB = require('img/avatars/avatar-b.png');
 const avatarD = require('img/avatars/avatar-d.png');
 
 export default class Home extends Component {
-  // static propTypes = {
-  // }
+  static propTypes = {
+    params: PropTypes.shape({
+      roomName: PropTypes.string.isRequired,
+    }),
+  }
 
   constructor(props) {
     super(props);
+    this.ref = Firebase.getFirebaseInstance();
+    const { roomName } = props.params;
+
+    this.ref.syncState(`rooms/${roomName}/users`, {
+      context: this,
+      state: 'users',
+    });
+
+    this.ref.fetch(`rooms/${roomName}/users`, {
+      context: this,
+      then: this.updateUsers,
+    });
+
     this.state = {
+      users: null,
+      activeStudentIndex: -1,
     };
+  }
+
+  updateUsers = (data) => {
+    this.setState({
+      users: data,
+    });
+  }
+
+  makeActive = (index) => {
+    this.setState({
+      activeStudentIndex: index,
+    });
   }
 
   // static defaultProps = {
   // }
 
   render() {
+    const Sidebar = this.state.users != null ?
+    Object.keys(this.state.users).map((user, index) =>
+      <li key={index} className={classNames('tab-item', 'tab-student', { active: index === this.state.activeStudentIndex })} >
+        <button type="button" onClick={() => this.makeActive(index)} className="badge" data-badge="3">
+          <figure className="avatar avatar-md" data-initial="A">
+            <img src={avatarA} alt="avatar" data-tip="React-tooltip" />
+          </figure>
+        </button>
+      </li>
+    ) : <span className="loading" />;
+
     return (
       <div className="teach">
+        <ReactTooltip place="right" />
         <div className="sidebar">
           <ul className="tab tab-side">
             <li className="tab-item tab-teacher">
@@ -33,32 +79,7 @@ export default class Home extends Component {
                 </figure>
               </a>
             </li>
-            <li className="tab-item tab-student">
-              <a href="#a" className="badge" data-badge="3">
-                <figure className="avatar avatar-md" data-initial="A">
-                  <img src={avatarA} alt="avatar" />
-                </figure>
-              </a>
-            </li>
-            <li className="tab-item tab-student active">
-              <a href="#b">
-                <figure className="avatar avatar-md" data-initial="B">
-                  <img src={avatarB} alt="avatar" />
-                </figure>
-              </a>
-            </li>
-            <li className="tab-item tab-student">
-              <a href="#c" className="badge" data-badge="1">
-                <figure className="avatar avatar-md" data-initial="C" />
-              </a>
-            </li>
-            <li className="tab-item tab-student">
-              <a href="#d">
-                <figure className="avatar avatar-md" data-initial="D">
-                  <img src={avatarD} alt="avatar" />
-                </figure>
-              </a>
-            </li>
+            {Sidebar}
           </ul>
         </div>
         <main className="view">
