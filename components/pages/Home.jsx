@@ -54,9 +54,9 @@ export default class Home extends Component {
 
         <header className="navbar">
           <section className="navbar-section">
-              <a href="#" className="navbar-brand">
-                  <img className="brandLogo" src="../../img/logo/logoFull.svg" alt="Branc Logo"/>
-              </a>
+            <a href="#" className="navbar-brand">
+              <img className="brandLogo" src="../../img/logo/logoFull.svg" alt="Branc Logo"/>
+            </a>
           </section>
           <section>
             <a href="#" target="_blank">
@@ -74,7 +74,7 @@ export default class Home extends Component {
           <div className="columns">
             <div className="column col-12 text-center">
               <h1 className="homeTitle">
-                Welcome    
+                Welcome
               </h1>
             </div>
           </div>
@@ -99,8 +99,7 @@ export default class Home extends Component {
               <div className="flex-item">
                 {this.state.isAvailable ?
                   <button className="btn btn-home input-group-btn" onChange={this.checkName}>Start Plz</button>
-                : <button className="btn btn-home input-group-btn" onChange={this.checkName} disabled>Start Plz</button>
-                }
+                : <button className="btn btn-home input-group-btn" onChange={this.checkName} disabled>Start Plz</button>}
               </div>
             </div>
           </div>
