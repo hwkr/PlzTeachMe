@@ -28,9 +28,10 @@ export default class Home extends Component {
               </h1>
             </div>
             <div className="column col-12 text-center">
-              <h1>
-                Welcome    
-              </h1>
+              <div class="input-group">
+                  <span class="input-group-addon">plzteach.me/room/</span>
+                  <input type="text" class="form-input" placeholder="site name" />
+              </div>
             </div>
           </div>
         </div>
