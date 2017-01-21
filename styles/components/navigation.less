@@ -80,6 +80,27 @@
       text-align: center;
     }
   }
+
+  &.tab-side {
+    flex-direction: column;
+
+    .tab-item {
+      border-left: .1rem solid @control-color;
+      border-bottom: none;
+
+      a {
+        border-left: .2rem solid transparent;
+        border-bottom: none;
+        margin-left: -.1rem;
+        margin-bottom: 0;
+      }
+
+      &.active a,
+      a.active {
+        border-left-color: darken(@core-color, 10%);
+      }
+    }
+  }
 }
 
 // Pagination
