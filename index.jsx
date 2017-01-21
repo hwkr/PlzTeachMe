@@ -30,7 +30,6 @@ const routes = (
     <IndexRoute component={Home} />
 
     <Route path="example" mapMenuTitle="Example" component={ExampleComponent}>
-      <Route path="example" mapMenuTitle="Two Deep" component={ExampleComponent} />
       <Route path="two-deep" mapMenuTitle="Two Deep" component={ExampleTwoDeepComponent} />
     </Route>
     <Route path="*" mapMenuTitle="Page Not Found" component={PageNotFound} />

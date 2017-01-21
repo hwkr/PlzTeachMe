@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
+import Helmet from 'react-helmet';
+
 const propTypes = {
   location: PropTypes.object.isRequired,
 };
@@ -40,6 +42,7 @@ function ExampleTwoDeepComponent({ location }) {
   return (
     <div>
       <div>
+        <Helmet title="Example Two Deep" />
         <div>{queryStringTitle()}</div>
         <ul>
           {Object.keys(location.query).map((field, index) =>
