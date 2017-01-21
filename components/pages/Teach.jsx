@@ -71,11 +71,11 @@ export default class Home extends Component {
         <div className="sidebar">
           <ul className="tab tab-side">
             <li className="tab-item tab-teacher">
-              <a href="#teacher">
+              <button onClick={() => this.makeActive(-1)}>
                 <figure className="avatar avatar-md">
                   <Icon name="group" />
                 </figure>
-              </a>
+              </button>
             </li>
             {Sidebar}
           </ul>
