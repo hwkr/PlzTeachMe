@@ -6,8 +6,8 @@ import 'current-input';
 import ReactGA from 'react-ga';
 
 import Config from 'Config';
-
 /*
+
     Pages
 */
 
@@ -26,7 +26,6 @@ import 'font/iconsplz.font';
 
 ReactGA.initialize(Config.tracking_id);
 
-
 const routes = (
   <Route path="/" mapMenuTitle="Home" component={App}>
     <IndexRoute component={Home} />
@@ -41,8 +40,8 @@ const routes = (
 );
 
 function logPageView() {
-  ReactGA.set({ page: window.location.pathname });
   ReactGA.pageview(window.location.pathname);
+  ReactGA.set({ page: window.location.pathname });
 }
 
 render(
