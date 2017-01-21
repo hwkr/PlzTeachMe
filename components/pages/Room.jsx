@@ -1,6 +1,5 @@
 import React from 'react';
-import CodeView from '../CodeView';
-import LiveView from '../LiveView';
+import Pad from 'components/Pad';
 
 export default class Room extends React.Component {
   constructor(props) {
@@ -12,8 +11,7 @@ export default class Room extends React.Component {
   render() {
     return (
       <div>
-        <CodeView />
-        <LiveView />
+        <Pad />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
-import CodeView from './CodeView';
-import LiveView from './LiveView';
+import CodeView from 'components/CodeView';
+import LiveView from 'components/LiveView';
 
 export default class Pad extends React.Component {
   constructor(props) {
