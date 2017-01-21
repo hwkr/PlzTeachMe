@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import CodeMirror from 'react-codemirror';
 
-export default class Editor extends React.Component {
+export default class TextEditor extends React.Component {
   static propTypes = {
     width: PropTypes.string,
     height: PropTypes.string,
