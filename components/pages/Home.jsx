@@ -29,7 +29,7 @@ export default class Home extends Component {
         users: {},
       },
     }).then(() => {
-      window.location.href += `teach/${roomName}`;
+      window.location.href = `/teach/${roomName}`;
     }).catch(err => {
       // handle error
       console.error(err);

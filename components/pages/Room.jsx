@@ -44,7 +44,22 @@ export default class Room extends Component {
         },
       },
     }).then(() => {
-      window.location.href += `/${userId}`;
+      window.location.href = `/room/${roomName}/${userId}`;
+    }).catch(err => {
+      // handle error
+      console.error(err);
+    });
+  }
+
+  createRoom = () => {
+    const { roomName } = this.props.params;
+    this.ref.post(`rooms/${roomName}`, {
+      data: {
+        title: roomName,
+        users: {},
+      },
+    }).then(() => {
+      window.location.href = `/teach/${roomName}`;
     }).catch(err => {
       // handle error
       console.error(err);
@@ -109,9 +124,9 @@ export default class Room extends Component {
             <div className="col-md-12 col-6">
               <div className="empty">
                 <Icon name="warning" />
-                <p className="empty-title">Student not Found</p>
-                <p className="empty-meta">Hmmm, that's not good.</p>
-                <Link className="empty-action btn btn-primary" to="/">Go home</Link>
+                <p className="empty-title">User not Found</p>
+                <p className="empty-meta">Hmm, we couldn't find that user in the room, <b>{roomName}</b>.</p>
+                <a className="empty-action btn btn-primary" href={`/room/${roomName}`}>Create a new user in <b>{roomName}</b></a>
               </div>
             </div>
           </div>
@@ -126,7 +141,9 @@ export default class Room extends Component {
               <Icon name="warning" />
               <p className="empty-title">Room not Found</p>
               <p className="empty-meta">We couldn't find the room, <b>{roomName}</b>.</p>
-              <Link className="empty-action btn btn-primary" to="/">Go home</Link>
+              <button className="empty-action btn btn-primary" onClick={this.createRoom}>
+                Create <b>{roomName}</b>
+              </button>
             </div>
           </div>
         </div>
