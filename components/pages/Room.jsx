@@ -54,21 +54,6 @@ export default class Room extends Component {
     });
   }
 
-  createRoom = () => {
-    const { roomName } = this.props.params;
-    this.ref.post(`rooms/${roomName}`, {
-      data: {
-        title: roomName,
-        users: {},
-      },
-    }).then(() => {
-      window.location.href = `/teach/${roomName}`;
-    }).catch(err => {
-      // handle error
-      console.error(err);
-    });
-  }
-
   checkRoom = () => {
     const { roomName } = this.props.params;
 

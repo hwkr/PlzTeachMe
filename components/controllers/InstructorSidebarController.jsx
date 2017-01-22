@@ -10,7 +10,7 @@ const avatarB = require('img/avatars/avatar-b.png');
 // const avatarC = require('img/avatars/avatar-c.png');
 const avatarD = require('img/avatars/avatar-d.png');
 
-export default class Footer extends Component {
+export default class InstructorSidebarController extends Component {
   static propTypes = {
     params: PropTypes.shape({
       roomName: PropTypes.string.isRequired,
