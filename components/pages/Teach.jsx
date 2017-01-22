@@ -83,18 +83,12 @@ export default class Home extends Component {
     const Sidebar = this.state.users == null ?
       <span className="loading" />
       :
-      this.state.users.map((user, index) => {
-        if (user.key === 'instructor') return null;
-        return (
-          <li key={index} className={classNames('tab-item', 'tab-student', { active: index === this.state.activeStudentIndex })} >
-            <button onClick={() => this.makeActive(index)} className="badge" data-badge="3">
-              <figure className="avatar avatar-md" data-initial="A">
-                <img src={avatarA} alt="avatar" />
-              </figure>
-            </button>
-          </li>
-        );
-      }
+      this.state.users.map((user, index) =>
+        <li key={index} className={classNames('tab-item', 'tab-student', { active: index === this.state.activeStudentIndex })} >
+          <button onClick={() => this.makeActive(index)} className="badge" data-badge="3">
+            <figure className="avatar avatar-md" data-initial="AC" />
+          </button>
+        </li>
       );
 
     const { roomName } = this.props.params;
