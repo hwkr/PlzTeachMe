@@ -4,6 +4,7 @@ import * as Firebase from 'functions/firebase';
 // import Icon from 'parts/Icon';
 
 import Editor from 'components/editor/Editor';
+import Messenger from 'parts/Messenger';
 
 export default class TeacherView extends Component {
   static propTypes = {
@@ -65,6 +66,7 @@ export default class TeacherView extends Component {
             <Editor editorPath={`rooms/${roomName}/users/${userId}/editorContent`} />
           </div>
         </div>
+        <Messenger userId={'Instructor'} userName={'Instructor'} roomName={roomName} />
       </div>
     );
   }
