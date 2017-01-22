@@ -40,10 +40,13 @@ export default class StudentView extends Component {
     const { userName } = this.state.user;
 
     return (
-      <div className="container">
+      <div className="container student-view">
         <div className="columns">
           <div className="column col-12">
-            <input value={userName} type="text" placeholder="username" onChange={this.changeName} />
+            <h4 className="student-name">
+              <span>Joined as</span>
+              <input className="form-input input-lg" value={userName} type="text" placeholder="username" onChange={this.changeName} />
+            </h4>
           </div>
         </div>
         <div className="columns">
