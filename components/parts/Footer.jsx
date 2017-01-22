@@ -20,11 +20,11 @@ export default class Home extends Component {
 
   render() {
     return (
-      <footer className="footer">
-        <div className="input-group input-inline float-right">
+      <footer>
+        <div className="input-group input-inline">
           {
             Config.social.map((link) =>
-              <a key={link.href} className="btn btn-link" href={link.href} target="_blank" rel="noopener noreferrer">
+              <a key={link.href} className="btn btn-link tooltip tooltip-top" data-tooltip={link.tooltip} href={link.href} target="_blank" rel="noopener noreferrer">
                 <Icon name={link.icon} />
                 <span>{link.label}</span>
               </a>
