@@ -83,7 +83,7 @@ export default class Home extends Component {
           <div className="columns">
             <div className="column col-12 text-center">
               <h1 className="homeTitle">
-                Welcome
+                Pair program with me. Join a room and start learning.
               </h1>
             </div>
           </div>
