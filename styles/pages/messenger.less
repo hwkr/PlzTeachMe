@@ -1,23 +1,49 @@
 .messenger {
-  position: fixed;
-  bottom: 5px;
-  right: 15px;
-  .header {
+  height: 70vh;;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
 
+  .tab {
+    margin: 0;
+    flex-shrink: 0
   }
-  .content {
-    height: 200px;
-    border: 1px solid white;
+
+  .messages {
+    flex-grow: 1;
+    flex-basis: auto;
+    min-height: 0;
+    overflow-y: auto;
+
+    padding: @layout-padding/2;
+
     .message {
+      display: flex;
+      margin: @layout-margin/8 0;
 
-    }
-  }
-  .textInput {
-    .textField {
+      .body {
+        flex-grow: 1;
+        padding-left: @layout-padding/2;
+        p {
+          background: darken(@body-bg, 6%);
+          border-radius: @border-radius;
+          padding: @layout-padding/2;
+        }
+      }
+      .avatar {
+        background: @control-color;
+      }
 
-    }
-    .submitButton {
-
+      &.from-me {
+        flex-direction: row-reverse;
+        .body {
+          padding-left: 0;
+          padding-right: @layout-padding/2;
+          p {
+            background: darken(@body-bg, 4%);
+          }
+        }
+      }
     }
   }
 }

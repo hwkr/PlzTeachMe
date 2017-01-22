@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-// import Icon from 'parts/Icon';
+import Messenger from 'parts/Messenger';
 
 import Editor from 'components/editor/Editor';
 
@@ -26,8 +26,11 @@ export default class GroupView extends Component {
           </div>
         </div>
         <div className="columns">
-          <div className="column col-12">
+          <div className="column col-9">
             <Editor editorPath={`rooms/${roomName}/instructor/editorContent`} />
+          </div>
+          <div className="column col-3">
+            <Messenger userId="Instructor" userName="Instructor" roomName={roomName} />
           </div>
         </div>
       </div>
