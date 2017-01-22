@@ -46,7 +46,7 @@ export default class StudentView extends Component {
         </div>
         <div className="columns">
           <div className="column col-12">
-            <Editor userId={userId} roomName={roomName} />
+            <Editor editorPath={`rooms/${roomName}/users/${userId}/editorContent`} />
           </div>
         </div>
       </div>

@@ -20,15 +20,14 @@ function generateCombinedHtml(content) {
 
 export default class Editor extends React.Component {
   static propTypes = {
-    userId: PropTypes.string.isRequired,
-    roomName: PropTypes.string.isRequired,
+    editorPath: PropTypes.string,
   }
 
   constructor(props) {
     super(props);
     this.ref = Firebase.getFirebaseInstance();
 
-    this.ref.syncState(`rooms/${this.props.roomName}/users/${this.props.userId}/editorContent`, {
+    this.unmountRef = this.ref.syncState(this.props.editorPath, {
       context: this,
       state: 'content',
     });
@@ -41,6 +40,15 @@ export default class Editor extends React.Component {
         javascript: '',
       },
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.ref.removeBinding(this.unmountRef);
+
+    this.unmountRef = this.ref.syncState(nextProps.editorPath, {
+      context: this,
+      state: 'content',
+    });
   }
 
   setHtml = (content) => {
