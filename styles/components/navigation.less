@@ -44,6 +44,12 @@
     border-bottom: .1rem solid @control-color;
     margin-top: 0;
 
+    button {
+      background: none;
+      border: none;
+      outline: none;
+    }
+
     a, button {
       border-bottom: .2rem solid transparent;
       color: @body-font-color;
@@ -52,6 +58,7 @@
       margin-top: 0;
       padding: .8rem 1.4rem;
       text-decoration: none;
+      cursor: pointer;
       &:focus,
       &:hover {
         color: @core-link-color;
@@ -60,7 +67,7 @@
 
     &.active a,
     &.active button,
-    a.active, 
+    a.active,
     button.active {
       border-bottom-color: darken(@core-color, 10%);
       color: darken(@core-link-color, 10%);
@@ -86,6 +93,9 @@
   &.tab-side {
     flex-direction: column;
 
+    overflow-x: visible;
+    overflow-y: auto;
+
     .tab-item {
       border-left: .1rem solid @control-color;
       border-bottom: none;
@@ -106,8 +116,8 @@
 
       .badge {
         &[data-badge]::after {
-          right: -0.2rem;
-          top: 1.6rem;
+          right: -1rem;
+          top: 1.4rem;
           z-index: 100;
         }
       }

@@ -6,9 +6,16 @@
   "themecolor": "#CCCCCC",
   "social": [
     {
+      "label": "About",
+      "icon": "heart",
+      "href": "http://github.com/hwkr/plzteachme/README.md",
+      "tooltip": "About us."
+    },
+    {
       "label": "GitHub",
       "icon": "social-github",
-      "href": "http://github.com/hwkr/plzteachme"
+      "href": "http://github.com/hwkr/plzteachme",
+      "tooltip": "Contribute! Visit our open source project."
     }
   ]
 }

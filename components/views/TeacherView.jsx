@@ -5,9 +5,7 @@ import * as Firebase from 'functions/firebase';
 
 import Editor from 'components/editor/Editor';
 
-import Messenger from 'parts/Messenger';
-
-export default class StudentView extends Component {
+export default class TeacherView extends Component {
   static propTypes = {
     roomName: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
@@ -15,6 +13,7 @@ export default class StudentView extends Component {
 
   constructor(props) {
     super(props);
+
     this.ref = Firebase.getFirebaseInstance();
 
     this.state = {
@@ -24,17 +23,28 @@ export default class StudentView extends Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     const { roomName, userId } = this.props;
 
-    this.ref.syncState(`rooms/${roomName}/users/${userId}/user`, {
+    this.unmountRef = this.ref.syncState(`rooms/${roomName}/users/${userId}/user`, {
       context: this,
       state: 'user',
     });
   }
 
-  changeName = (e) => {
-    this.setState({ user: { userName: e.target.value } });
+  componentWillReceiveProps(nextProps) {
+    const { roomName, userId } = nextProps;
+
+    this.ref.removeBinding(this.unmountRef);
+
+    this.unmountRef = this.ref.syncState(`rooms/${roomName}/users/${userId}/user`, {
+      context: this,
+      state: 'user',
+    });
+  }
+
+  componentWillUnmount() {
+    this.ref.removeBinding(this.unmountRef);
   }
 
   render() {
@@ -42,12 +52,11 @@ export default class StudentView extends Component {
     const { userName } = this.state.user;
 
     return (
-      <div className="container student-view">
+      <div className="container">
         <div className="columns">
           <div className="column col-12">
-            <h4 className="student-name">
-              <span>Joined as</span>
-              <input className="form-input input-lg" value={userName} type="text" placeholder="username" onChange={this.changeName} />
+            <h4>
+              Helping <b>{userName}</b>.
             </h4>
           </div>
         </div>
@@ -55,7 +64,6 @@ export default class StudentView extends Component {
           <div className="column col-12">
             <Editor editorPath={`rooms/${roomName}/users/${userId}/editorContent`} />
           </div>
-          <Messenger userId={userId} userName={userName} roomName={roomName} />
         </div>
       </div>
     );

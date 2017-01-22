@@ -3,18 +3,14 @@ import classNames from 'classnames';
 
 import Icon from 'parts/Icon';
 
-import Editor from 'editor/Editor';
 import Messenger from 'parts/Messenger';
+import GroupView from 'views/GroupView';
+import TeacherView from 'views/TeacherView';
 
 import RoomNotFound from 'pages/RoomNotFound';
 import Loading from 'pages/Loading';
 
 import * as Firebase from 'functions/firebase';
-
-const avatarA = require('img/avatars/avatar-a.png');
-const avatarB = require('img/avatars/avatar-b.png');
-// const avatarC = require('img/avatars/avatar-c.png');
-const avatarD = require('img/avatars/avatar-d.png');
 
 export default class Home extends Component {
   static propTypes = {
@@ -31,8 +27,9 @@ export default class Home extends Component {
 
     this.state = {
       loading: true,
+      roomExists: false,
       users: null,
-      activeStudentIndex: -1,
+      activeUser: -1,
     };
   }
 
@@ -83,24 +80,13 @@ export default class Home extends Component {
 
   makeActive = (index) => {
     this.setState({
-      activeStudentIndex: index,
+      activeUser: index,
     });
   }
 
   render() {
-    const Sidebar = this.state.users == null ?
-      <span className="loading" />
-      :
-      this.state.users.map((userObj, index) =>
-        <li key={index} className={classNames('tab-item', 'tab-student', { active: index === this.state.activeStudentIndex })} >
-          <button onClick={() => this.makeActive(index)} className="badge" data-badge="3">
-            <figure className="avatar avatar-md" data-initial={this.getInitials(userObj.user.userName)} />
-          </button>
-        </li>
-      );
-
     const { roomName } = this.props.params;
-    const { loading, roomExists } = this.state;
+    const { loading, roomExists, users, activeUser } = this.state;
 
     if (loading) {
       return (
@@ -108,32 +94,35 @@ export default class Home extends Component {
       );
     } else if (roomExists) {
       return (
-        <div className="teach">
+        <div className="teach fill-page">
           <div className="sidebar">
             <ul className="tab tab-side">
-              <li className="tab-item tab-teacher">
+              <li className={classNames('tab-item', 'tab-teacher', 'tooltip', 'tooltip-right', { active: activeUser === -1 })} data-tooltip="Group">
                 <button onClick={() => this.makeActive(-1)}>
                   <figure className="avatar avatar-md">
                     <Icon name="group" />
                   </figure>
                 </button>
               </li>
-              {Sidebar}
+              {users == null ?
+                <span className="loading" />
+                :
+                users.map((user, index) =>
+                  <li key={index} className={classNames('tab-item', 'tab-student', 'tooltip', 'tooltip-right', { active: index === activeUser })} data-tooltip={user.user.userName}>
+                    <button onClick={() => this.makeActive(index)}>
+                      <figure className="avatar avatar-md" data-initial={this.getInitials(user.user.userName)} />
+                    </button>
+                  </li>
+                )
+              }
             </ul>
           </div>
           <main className="view">
-            <div className="container">
-              <div className="columns">
-                <div className="column col-12">
-                  {this.state.activeStudentIndex === -1 ?
-                    <Editor editorPath={`rooms/${roomName}/instructor/editorContent`} />
-                  :
-                    <Editor editorPath={`rooms/${roomName}/users/${this.state.users[this.state.activeStudentIndex].key}/editorContent`} />
-                  }
-                </div>
-              </div>
-            </div>
-            <Messenger userId={'Instructor'} userName={'Instructor'} roomName={roomName} />
+            {activeUser === -1 ?
+              <GroupView roomName={roomName} />
+            :
+              <TeacherView roomName={roomName} userId={users[activeUser].key} />
+            }
           </main>
         </div>
       );

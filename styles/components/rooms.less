@@ -1,13 +1,17 @@
-.liveViewContainer {
-    width: 63%;
-    float: right;
-    margin: 1%;
-    border: 1px solid black;
-    height: 50%;
-}
+.student-view {
+    .student-name {
 
-.editorContainer {
-    width: 33%;
-    float: left;
-    margin: 1%;
+        &, .form-input {
+            font-size: 2.4rem;
+        }
+
+        .form-input {
+
+            display: inline-block;
+            width: auto;
+            border-color: transparent;
+            background-color: darken(@body-bg, 5%);
+            margin: 0 0.8rem;
+        }
+    }
 }
