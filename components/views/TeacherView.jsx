@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import * as Firebase from 'functions/firebase';
 
+import Messenger from 'parts/Messenger';
+
 import Editor from 'components/editor/Editor';
 
 export default class TeacherView extends Component {
@@ -59,8 +61,11 @@ export default class TeacherView extends Component {
           </div>
         </div>
         <div className="columns">
-          <div className="column col-12">
+          <div className="column col-9">
             <Editor editorPath={`rooms/${roomName}/users/${userId}/editorContent`} />
+          </div>
+          <div className="editor-preview column col-3">
+            <Messenger userId="Instructor" userName="Instructor" roomName={roomName} />
           </div>
         </div>
       </div>
