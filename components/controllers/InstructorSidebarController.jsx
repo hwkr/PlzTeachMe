@@ -54,16 +54,18 @@ export default class Footer extends Component {
   }
 
   render() {
-    const Sidebar = this.state.users != null ?
-    Object.keys(this.state.users).map((user, index) =>
-      <li key={index} className={classNames('tab-item', 'tab-student', { active: index === this.state.activeStudentIndex })} >
-        <button onClick={() => this.makeActive(index)} className="badge" data-badge="3">
-          <figure className="avatar avatar-md" data-initial="A">
-            <img src={avatarA} alt="avatar" />
-          </figure>
-        </button>
-      </li>
-    ) : <span className="loading" />;
+    const Sidebar = this.state.users == null ?
+      <span className="loading" />
+      :
+      Object.keys(this.state.users).map((user, index) =>
+        <li key={index} className={classNames('tab-item', 'tab-student', { active: index === this.state.activeStudentIndex })} >
+          <button onClick={() => this.makeActive(index)} className="badge" data-badge="3">
+            <figure className="avatar avatar-md" data-initial="A">
+              <img src={avatarA} alt="avatar" />
+            </figure>
+          </button>
+        </li>
+      );
     return (
       <div className="sidebar">
         <ul className="tab tab-side">
