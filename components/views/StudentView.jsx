@@ -52,10 +52,12 @@ export default class StudentView extends Component {
           </div>
         </div>
         <div className="columns">
-          <div className="column col-12">
+          <div className="column col-9">
             <Editor editorPath={`rooms/${roomName}/users/${userId}/editorContent`} />
           </div>
-          <Messenger userId={userId} userName={userName} roomName={roomName} />
+          <div className="column col-3">
+            <Messenger userId={userId} userName={userName} roomName={roomName} />
+          </div>
         </div>
       </div>
     );
