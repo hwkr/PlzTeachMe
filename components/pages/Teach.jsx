@@ -117,17 +117,11 @@ export default class Home extends Component {
             </ul>
           </div>
           <main className="view">
-            <div className="container">
-              <div className="columns">
-                <div className="column col-12">
-                  {activeUser === -1 ?
-                    <GroupView roomName={roomName} />
-                  :
-                    <TeacherView roomName={roomName} userId={users[activeUser].key} />
-                  }
-                </div>
-              </div>
-            </div>
+            {activeUser === -1 ?
+              <GroupView roomName={roomName} />
+            :
+              <TeacherView roomName={roomName} userId={users[activeUser].key} />
+            }
           </main>
         </div>
       );

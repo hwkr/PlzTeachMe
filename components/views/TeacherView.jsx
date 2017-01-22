@@ -23,13 +23,17 @@ export default class TeacherView extends Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     const { roomName, userId } = this.props;
 
-    this.ref.syncState(`rooms/${roomName}/users/${userId}/user`, {
+    this.unmountRef = this.ref.syncState(`rooms/${roomName}/users/${userId}/user`, {
       context: this,
       state: 'user',
     });
+  }
+
+  componentWillUnmount() {
+    this.ref.removeBinding(this.unmountRef);
   }
 
   render() {
@@ -40,7 +44,9 @@ export default class TeacherView extends Component {
       <div className="container">
         <div className="columns">
           <div className="column col-12">
-            <h3>{userName}</h3>
+            <h4>
+              Helping <b>{userName}</b>.
+            </h4>
           </div>
         </div>
         <div className="columns">
