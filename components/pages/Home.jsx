@@ -53,7 +53,7 @@ export default class Home extends Component {
               </p>
             </div>
             <div className="col-md-12 col-6">
-              <div className={classnames('input-group', { tooltip: roomName !== '' }, 'tooltip-bottom')} data-tooltip={roomExists ? 'Good dank name!' : 'Uh oh! We can\'t find that room  &#x1F631'}>
+              <div className={classnames('input-group', { tooltip: !roomExists && roomName !== '' }, 'tooltip-bottom')} data-tooltip="Uh oh! We can't find that room  &#x1F631;">
                 <span className="input-group-addon addon-lg">plzteach.me/room/</span>
                 <input type="text" className="form-input input-lg" placeholder="Room Name" value={roomName} onChange={this.roomNameChange} />
                 <button className={classnames({ disabled: !roomExists }, 'btn', 'btn-primary', 'btn-lg', 'input-group-btn')} onClick={this.joinRoom}>Join</button>
