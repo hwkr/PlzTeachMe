@@ -211,6 +211,26 @@
   min-height: 1.6rem;
   pointer-events: none;
   position: relative;
+  &.loading-sm {
+    &::after {
+      height: 0.8rem;
+      width: 0.8rem;
+      margin-left: -.4rem;
+      margin-top: -.4rem;
+      border-radius: .4rem;
+      border-width: .1rem;
+    }
+  }
+  &.loading-lg {
+    &::after {
+      height: 2.8rem;
+      width: 2.8rem;
+      margin-left: -1.4rem;
+      margin-top: -1.4rem;
+      border-radius: 1.4rem;
+      border-width: .3rem;
+    }
+  }
   &::after {
     animation: loading 500ms infinite linear;
     border: .2rem solid @core-color;

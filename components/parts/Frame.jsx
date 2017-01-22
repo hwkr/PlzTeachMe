@@ -21,14 +21,12 @@ const Frame = (ComposedComponent) => class extends Component {
   render = () => <iframe {...this.props.frameProps} />;
 
   componentDidMount = () => {
-    const frameBody = ReactDOM.findDOMNode(this).contentDocument.body; //eslint-disable-line
+    const frame = ReactDOM.findDOMNode(this); //eslint-disable-line
+    const frameBody = frame.contentDocument.body;
     const el = document.createElement('div');
     frameBody.appendChild(el);
     this.el = el;
-    this.updateIFrameContents();
-  }
 
-  componentDidUpdate = () => {
     this.updateIFrameContents();
   }
 };
