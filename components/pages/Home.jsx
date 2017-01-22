@@ -54,34 +54,19 @@ export default class Home extends Component {
 
         {/* Header */}
         <Navbar />
-        {/* Welcome Message */}
         <div className="container">
-          <div className="columns">
-            <div className="column col-12 text-center">
-              <h1 className="homeTitle">
+          <div className="hero">
+            <div className="col-md-12 col-8">
+              <p className="cta">
                 Pair program with me. Join a room and start learning.
-              </h1>
+              </p>
             </div>
-          </div>
-        </div>
-        {/* Input Bar */}
-        <div className="container">
-          <div className="columns">
-            <div className="row column col-6">
-              <div className="flex-item">
-                <div className="input-group homeBox">
-                  <span className="input-group-addon addon-lg">plzteach.me/room/</span>
-                  <input type="text" className="form-input input-lg homeInput" placeholder="Room Name" value={roomName} onChange={this.roomNameChange} />
-                </div>
+            <div className="col-md-12 col-6">
+              <div className="input-group">
+                <span className="input-group-addon addon-lg">plzteach.me/room/</span>
+                <input type="text" className="form-input input-lg" placeholder="Room Name" value={roomName} onChange={this.roomNameChange} />
+                <button className={classnames('btn', 'btn-primary', 'btn-lg', 'input-group-btn', { disabled: isRoomNameAvailable })} onChange={this.checkName}>Join</button>
               </div>
-            </div>
-          </div>
-        </div>
-        {/* Start Plz Button */}
-        <div className="container">
-          <div className="columns">
-            <div className="column col-6">
-              <button className={classnames('btn', 'btn-home', 'input-group-btn', { disabled: !isRoomNameAvailable })} onChange={this.checkName}>Start Plz</button>
             </div>
           </div>
         </div>
