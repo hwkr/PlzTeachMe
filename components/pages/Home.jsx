@@ -27,6 +27,13 @@ export default class Home extends Component {
       data: {
         title: roomName,
         users: {},
+        instructor: {
+          editorContent: {
+            html: '',
+            css: '',
+            javascript: '',
+          },
+        },
       },
     }).then(() => {
       window.location.href = `/teach/${roomName}`;
