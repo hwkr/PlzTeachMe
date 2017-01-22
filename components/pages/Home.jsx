@@ -21,24 +21,8 @@ export default class Home extends Component {
   // static defaultProps = {
   // }
 
-  createRoom = () => {
-    const { roomName } = this.state;
-    this.ref.post(`rooms/${roomName}`, {
-      data: {
-        title: roomName,
-        users: {},
-      },
-    }).then(() => {
-      window.location.href = `/teach/${roomName}`;
-    }).catch(err => {
-      // handle error
-      console.error(err);
-    });
-  }
-
   joinRoom = () => {
     const { roomName } = this.state;
-    console.log(roomName);
     window.location.href = `/room/${roomName}`;
   }
 
@@ -51,7 +35,6 @@ export default class Home extends Component {
       then: (room) => { this.setState({ roomExists: room !== null }); },
     });
   }
-
 
   render() {
     const { roomName, roomExists } = this.state;
@@ -68,7 +51,7 @@ export default class Home extends Component {
               </p>
             </div>
             <div className="col-md-12 col-6">
-              <div className={classnames('input-group', { 'has-danger': !roomExists && roomName !== '' }, { tooltip: !roomExists && roomName !== '' })} data-tooltip="Room does not exist">
+              <div className={classnames('input-group', { tooltip: !roomExists && roomName !== '' }, 'tooltip-bottom')} data-tooltip="Uh oh! We can't find that room  &#x1F631;">
                 <span className="input-group-addon addon-lg">plzteach.me/room/</span>
                 <input type="text" className="form-input input-lg" placeholder="Room Name" value={roomName} onChange={this.roomNameChange} />
                 <button className={classnames({ disabled: !roomExists }, 'btn', 'btn-primary', 'btn-lg', 'input-group-btn')} onClick={this.joinRoom}>Join</button>
