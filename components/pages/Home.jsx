@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import * as Firebase from 'functions/firebase';
 
 import Navbar from 'parts/Navbar';
+import Footer from 'parts/Footer';
 
 export default class Home extends Component {
   // static propTypes = {
@@ -39,10 +40,11 @@ export default class Home extends Component {
   render() {
     const { roomName, roomExists } = this.state;
     return (
-      <div className="home">
+      <div className="home fill-page">
 
         {/* Header */}
         <Navbar />
+        {/* Main Content */}
         <div className="container">
           <div className="hero">
             <div className="col-md-12 col-8">
@@ -59,6 +61,8 @@ export default class Home extends Component {
             </div>
           </div>
         </div>
+        {/* Footer */}
+        <Footer />
       </div>
     );
   }
