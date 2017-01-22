@@ -23,8 +23,8 @@ export default class Home extends Component {
       <footer>
         <div className="input-group input-inline">
           {
-            Config.social.map((link) =>
-              <a key={link.href} className="btn btn-link tooltip tooltip-top" data-tooltip={link.tooltip} href={link.href} target="_blank" rel="noopener noreferrer">
+            Config.social.map((link, index) =>
+              <a key={index} className="btn btn-link tooltip tooltip-top" data-tooltip={link.tooltip} href={link.href} target="_blank" rel="noopener noreferrer">
                 <Icon name={link.icon} />
                 <span>{link.label}</span>
               </a>
