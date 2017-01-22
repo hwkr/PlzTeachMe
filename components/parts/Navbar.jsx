@@ -4,10 +4,7 @@ import classnames from 'classnames';
 
 import * as Firebase from 'functions/firebase';
 
-import Icon from 'parts/Icon';
-import Config from 'Config';
-
-import brand from 'img/logo/logoFull.svg';
+import brand from 'img/iconWhite.svg';
 
 export default class Head extends Component {
   static propTypes = {
@@ -64,16 +61,6 @@ export default class Head extends Component {
           <Link to="/" className="navbar-brand">
             <img className="brand" src={brand} alt="Branc Logo" />
           </Link>
-          <div className="input-group input-inline">
-            {
-              Config.social.map((link) =>
-                <a key={link.href} className="btn btn-link" href={link.href} target="_blank" rel="noopener noreferrer">
-                  <Icon name={link.icon} />
-                  <span>{link.label}</span>
-                </a>
-              )
-            }
-          </div>
         </section>
         <section className="navbar-section">
           <div className={classnames('input-group', 'input-inline', { tooltip: roomExists && roomName !== '' }, 'tooltip-bottom')} data-tooltip="Oh no! That room already exists &#x1F61E;">
