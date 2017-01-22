@@ -1,0 +1,12 @@
+before_script: npm install
+script: npm run deploy
+language: node_js
+node_js:
+- '6'
+branches:
+  only:
+  - deploy
+env:
+  global:
+  - GH_REF: github.com/hwkr/PlzTeachMe
+  - secure: bSh9HRxLJQkCH+jQ9MtxJQxIyH9pd7rumB94yQlrJDKvT5Z4ypBYaCxvBm5OV776zHCcAUxFBlyP4V3b0TsOjpnMEaxK9cH2v1dqZ+ECj9hMIGXY4K7vFk7fuwXSOidvFm285yYNCIHQPQ/XpE5X9p4wzUitVBVtKDfnuvgAeDaGpRoHbm411l7tbJfXE+qXgXyw7Gw9AJMpM0LF4mb/Ald+9FFaK2S2T/rKRa7nGysL/7bQ2Zc5RbSDM0a7MwzjgkosSfovJwcIFjx7++/DMAdeDxQ1AmiGwCV1xUJhpj8bjOOw/5Cx/pDvdS44qt4po03t5QCOv6bqPraUZ3YGgQpzj5p4SsqeuP49wSoeZM9YwQ/hIAilJ2D1XGd0Dp4wfFQUuKkBitNr63fX80VhGyl7tKsGSpEzghBysHqvBbBj3vBU8ZL67qTSz7uFAcMWssP5jdDU+80/90FC3EF6kbU1+iDWwMMtDbykAYOGj1Lkpi3UDEGIPKaCLNYgrkSVK9wwtsdZeBu8M44WaIlrwbFQMxou+/IDyud6Hk8fW3ql5uXCQtOb5bRWGoGYPLl0UH1msWG+4bxTy4q/G+IczUE4jVbso6djYM9j1dHSRABRvMNKrtfTwek73v1wwrqPZgg/z7WIUMz6NtBTXtAn5YBG3gNIVloHhh/xDVLed2Q=
