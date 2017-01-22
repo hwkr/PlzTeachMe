@@ -47,6 +47,15 @@ export default class Editor extends React.Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.ref.removeBinding(this.unmountRef);
+
+    this.unmountRef = this.ref.syncState(nextProps.editorPath, {
+      context: this,
+      state: 'content',
+    });
+  }
+
   componentWillUnmount() {
     this.ref.removeBinding(this.unmountRef);
   }

@@ -32,6 +32,17 @@ export default class TeacherView extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { roomName, userId } = nextProps;
+
+    this.ref.removeBinding(this.unmountRef);
+
+    this.unmountRef = this.ref.syncState(`rooms/${roomName}/users/${userId}/user`, {
+      context: this,
+      state: 'user',
+    });
+  }
+
   componentWillUnmount() {
     this.ref.removeBinding(this.unmountRef);
   }
