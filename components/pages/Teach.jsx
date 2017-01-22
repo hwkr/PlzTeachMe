@@ -108,7 +108,7 @@ export default class Home extends Component {
                 :
                 users.map((user, index) =>
                   <li key={index} className={classNames('tab-item', 'tab-student', 'tooltip', 'tooltip-right', { active: index === activeUser })} data-tooltip={user.user.userName}>
-                    <button onClick={() => this.makeActive(index)} className="badge" data-badge="3">
+                    <button onClick={() => this.makeActive(index)}>
                       <figure className="avatar avatar-md" data-initial={this.getInitials(user.user.userName)} />
                     </button>
                   </li>
