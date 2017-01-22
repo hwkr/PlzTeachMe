@@ -93,7 +93,7 @@ export default class Home extends Component {
       );
     } else if (roomExists) {
       return (
-        <div className="teach">
+        <div className="teach fill-page">
           <div className="sidebar">
             <ul className="tab tab-side">
               <li className={classNames('tab-item', 'tab-teacher', 'tooltip', 'tooltip-right', { active: activeUser === -1 })} data-tooltip="Group">
