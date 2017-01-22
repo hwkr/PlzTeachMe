@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import moment from 'moment';
 
 import * as Firebase from 'functions/firebase';
 
@@ -35,6 +36,17 @@ export default class Messenger extends Component {
       inputField: '',
       privateView: false,
     };
+  }
+
+  getInitials(nameString) {
+    const firstLast = nameString.split(' ');
+    let initials;
+    if (firstLast.length === 1) {
+      initials = firstLast[0][0];
+    } else {
+      initials = `${firstLast[0].charAt(0)}${firstLast[firstLast.length - 1].charAt(0)}`;
+    }
+    return initials;
   }
 
   setChatChannel(channel) {
@@ -73,6 +85,7 @@ export default class Messenger extends Component {
   }
 
   sendMessage = () => {
+
     const time = Date.now();
     const content = this.state.inputField;
     const currMessage = [{
@@ -82,6 +95,9 @@ export default class Messenger extends Component {
       author: this.props.userName,
       userId: this.props.userId,
     }];
+
+    if (content === '') return;
+
     if (this.state.privateView) {
       this.setState({
         privateMessages: {
@@ -96,22 +112,26 @@ export default class Messenger extends Component {
     this.setState({ inputField: '' });
   }
 
-  render() {
-    const privateMessages = [];
-    // const privateMessages = this.state.privateMessages === null ?
-    //   <span className="loading" />
-    // : this.state.privateMessages[this.props.userId].map((message, index) => <div key={index}>{message.content}</div>);
-    const publicMessages = this.state.publicMessages === null ?
-      <span className="loading" />
-    : this.state.publicMessages.map((message, index) =>
-      <div key={index} className="message">
-        <div className="messageContent">{message.content}</div>
-        <div className="messageTimestamp">{message.time}</div>
-        <div className="messageAuthor">{message.author}</div>
+  renderMessages = (messages) => {
+    const { userId } = this.props;
+
+    if (messages === null) return <span className="loading" />;
+
+    return messages.map((message, index) =>
+      <div key={index} className={classNames('message', { 'from-me': userId === message.userId })}>
+        <div className={classNames('author', 'tooltip', userId === message.userId ? 'tooltip-left' : 'tooltip-right')} data-tooltip={message.author}>
+          <figure className="avatar avatar-md" data-initial={this.getInitials(message.author)} />
+        </div>
+        <div className="body tooltip" data-tooltip={moment(message.time).fromNow()}>
+          <p>{message.content}</p>
+        </div>
       </div>
     );
+  }
 
-    const { privateView } = this.state;
+
+  render() {
+    const { publicMessages, privateView } = this.state;
 
     return (
       <div className="messenger">
@@ -127,10 +147,8 @@ export default class Messenger extends Component {
             </button>
           </li>
         </ul>
-        <div className="content">
-          <div className="messages">
-            {this.state.privateView ? privateMessages : publicMessages}
-          </div>
+        <div className="messages">
+          {this.renderMessages(publicMessages)}
         </div>
         <div className="input-group">
           <input className="text" className="form-input" placeholder="Send a message" onChange={this.updateMessage} value={this.state.inputField} />

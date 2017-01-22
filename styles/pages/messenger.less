@@ -1,21 +1,54 @@
 .messenger {
-  max-height: 60vh;;
+  height: 70vh;;
   display: flex;
   flex-direction: column;
   align-content: stretch;
 
-  .content {
-    flex-grow: 1;
-    flex-basis: auto;
-    min-width: 0;
-    padding: @layout-padding/2;
-    overflow-y: auto;
+  .tab {
+    margin: 0;
+    flex-shrink: 0
   }
 
   .messages {
+    flex-grow: 1;
+    flex-basis: auto;
+    min-height: 0;
+    overflow-y: auto;
+
     display: flex;
     flex-direction: column;
     align-content: stretch;
     justify-content: flex-end;
+
+    padding: @layout-padding/2;
+
+    .message {
+      display: flex;
+      margin: @layout-margin/8 0;
+
+      .body {
+        flex-grow: 1;
+        padding-left: @layout-padding/2;
+        p {
+          background: darken(@body-bg, 6%);
+          border-radius: @border-radius;
+          padding: @layout-padding/2;
+        }
+      }
+      .avatar {
+        background: @control-color;
+      }
+
+      &.from-me {
+        flex-direction: row-reverse;
+        .body {
+          padding-left: 0;
+          padding-right: @layout-padding/2;
+          p {
+            background: darken(@body-bg, 4%);
+          }
+        }
+      }
+    }
   }
 }

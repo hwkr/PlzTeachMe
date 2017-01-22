@@ -17,6 +17,7 @@
     "chance": "^1.0.4",
     "classnames": "^2.2.5",
     "current-input": "^1.1.0",
+    "moment": "^2.17.1",
     "re-base": "^2.5.2",
     "react": "^15.1.0",
     "react-codemirror": "^0.3.0",
