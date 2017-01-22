@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Icon from 'parts/Icon';
 
 import Editor from 'editor/Editor';
-// import InstructorSidebarController from 'controllers/InstructorSidebarController';
+import Messenger from 'parts/Messenger';
 
 import RoomNotFound from 'pages/RoomNotFound';
 import Loading from 'pages/Loading';
@@ -133,6 +133,7 @@ export default class Home extends Component {
                 </div>
               </div>
             </div>
+            <Messenger userId={'Instructor'} userName={'Instructor'} roomName={roomName} />
           </main>
         </div>
       );
