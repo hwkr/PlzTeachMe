@@ -15,8 +15,8 @@
 
     a {
       text-decoration: none;
-    }
     &:last-child {
+    }
       &,
       a {
         color: lighten(@body-font-color, 20%);
@@ -44,7 +44,7 @@
     border-bottom: .1rem solid @control-color;
     margin-top: 0;
 
-    a {
+    a, button {
       border-bottom: .2rem solid transparent;
       color: @body-font-color;
       display: block;
@@ -59,7 +59,9 @@
     }
 
     &.active a,
-    a.active {
+    &.active button,
+    a.active, 
+    button.active {
       border-bottom-color: darken(@core-color, 10%);
       color: darken(@core-link-color, 10%);
     }
@@ -88,7 +90,7 @@
       border-left: .1rem solid @control-color;
       border-bottom: none;
 
-      a {
+      a, button {
         border-left: .2rem solid transparent;
         border-bottom: none;
         margin-left: -.1rem;
@@ -96,7 +98,9 @@
       }
 
       &.active a,
-      a.active {
+      &.active button,
+      a.active,
+      button.active {
         border-left-color: darken(@core-color, 10%);
       }
 
