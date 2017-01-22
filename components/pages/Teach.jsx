@@ -3,7 +3,6 @@ import classNames from 'classnames';
 
 import Icon from 'parts/Icon';
 
-import Messenger from 'parts/Messenger';
 import GroupView from 'views/GroupView';
 import TeacherView from 'views/TeacherView';
 
