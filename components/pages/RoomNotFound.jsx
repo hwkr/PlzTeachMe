@@ -14,6 +14,13 @@ export default class RoomNotFound extends Component {
       data: {
         title: roomName,
         users: {},
+        instructor: {
+          editorContent: {
+            html: '',
+            css: '',
+            javascript: '',
+          },
+        },
       },
     }).then(() => {
       window.location.href = `/teach/${this.props.roomName}`;
