@@ -11,10 +11,11 @@
     background: @html-bg;
 
     .tab-side {
+      overflow: visible;
+
       .tab-item {
         margin-bottom: @layout-margin/2;
 
-        overflow: hidden;
         border-radius: @border-radius 0 0 @border-radius;
 
         border-left: none;
@@ -41,6 +42,9 @@
           margin-left: 0;
           opacity: 0.8;
           padding: @layout-padding/2;
+
+          overflow: hidden;
+          border-radius: @border-radius 0 0 @border-radius;
 
           &:hover {
             opacity: 1;

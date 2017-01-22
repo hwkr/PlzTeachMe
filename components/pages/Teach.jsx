@@ -96,7 +96,7 @@ export default class Home extends Component {
         <div className="teach">
           <div className="sidebar">
             <ul className="tab tab-side">
-              <li className={classNames('tab-item', 'tab-teacher', { active: activeUser === -1 })}>
+              <li className={classNames('tab-item', 'tab-teacher', 'tooltip', 'tooltip-right', { active: activeUser === -1 })} data-tooltip="Group">
                 <button onClick={() => this.makeActive(-1)}>
                   <figure className="avatar avatar-md">
                     <Icon name="group" />
@@ -106,10 +106,10 @@ export default class Home extends Component {
               {users == null ?
                 <span className="loading" />
                 :
-                users.map((userObj, index) =>
-                  <li key={index} className={classNames('tab-item', 'tab-student', { active: index === activeUser })}>
+                users.map((user, index) =>
+                  <li key={index} className={classNames('tab-item', 'tab-student', 'tooltip', 'tooltip-right', { active: index === activeUser })} data-tooltip={user.user.userName}>
                     <button onClick={() => this.makeActive(index)} className="badge" data-badge="3">
-                      <figure className="avatar avatar-md" data-initial={this.getInitials(userObj.user.userName)} />
+                      <figure className="avatar avatar-md" data-initial={this.getInitials(user.user.userName)} />
                     </button>
                   </li>
                 )

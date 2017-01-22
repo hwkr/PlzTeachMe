@@ -58,6 +58,7 @@
       margin-top: 0;
       padding: .8rem 1.4rem;
       text-decoration: none;
+      cursor: pointer;
       &:focus,
       &:hover {
         color: @core-link-color;
@@ -91,6 +92,9 @@
 
   &.tab-side {
     flex-direction: column;
+
+    overflow-x: visible;
+    overflow-y: auto;
 
     .tab-item {
       border-left: .1rem solid @control-color;
