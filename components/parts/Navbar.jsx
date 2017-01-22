@@ -26,7 +26,7 @@ export default class Head extends Component {
           <div className="input-group input-inline">
             {
               Config.social.map((link) =>
-                <a className="btn btn-link" href={link.href} target="_blank" rel="noopener noreferrer">
+                <a key={link.href} className="btn btn-link" href={link.href} target="_blank" rel="noopener noreferrer">
                   <Icon name={link.icon} />
                   <span>{link.label}</span>
                 </a>
