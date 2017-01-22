@@ -40,7 +40,7 @@ export default class Home extends Component {
   render() {
     const { roomName, roomExists } = this.state;
     return (
-      <div className="home">
+      <div className="home fill-page">
 
         {/* Header */}
         <Navbar />
