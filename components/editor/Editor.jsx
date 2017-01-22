@@ -27,11 +27,6 @@ export default class Editor extends React.Component {
     super(props);
     this.ref = Firebase.getFirebaseInstance();
 
-    this.unmountRef = this.ref.syncState(this.props.editorPath, {
-      context: this,
-      state: 'content',
-    });
-
     this.state = {
       loading: false,
       content: {
@@ -42,6 +37,16 @@ export default class Editor extends React.Component {
     };
   }
 
+
+  componentDidMount() {
+    const { editorPath } = this.props;
+
+    this.unmountRef = this.ref.syncState(editorPath, {
+      context: this,
+      state: 'content',
+    });
+  }
+
   componentWillReceiveProps(nextProps) {
     this.ref.removeBinding(this.unmountRef);
 
@@ -49,6 +54,10 @@ export default class Editor extends React.Component {
       context: this,
       state: 'content',
     });
+  }
+
+  componentWillUnmount() {
+    this.ref.removeBinding(this.unmountRef);
   }
 
   setHtml = (content) => {

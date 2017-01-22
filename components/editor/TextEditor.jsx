@@ -3,31 +3,22 @@ import CodeMirror from 'react-codemirror';
 
 export default class TextEditor extends React.Component {
   static propTypes = {
-    width: PropTypes.string,
-    height: PropTypes.string,
+    mode: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    content: PropTypes.string.isRequired,
     editorType: PropTypes.string,
     lineNumbers: PropTypes.bool,
-    mode: PropTypes.string,
-    onChange: PropTypes.func,
-    content: PropTypes.string,
   };
 
   static defaultProps = {
     lineNumbers: true,
   }
 
-  editorRefCallback = (ref) => {
-    const cm = ref.getCodeMirror();
-    const { width, height } = this.props;
-    // set width & height
-    cm.setSize(width, height);
-  }
-
   render() {
     return (
       <div className="text-editor">
         <h4 className="editor-title">{this.props.mode}</h4>
-        <CodeMirror ref={this.editorRefCallback} value={this.props.content} onChange={this.props.onChange} options={this.props} />
+        <CodeMirror value={this.props.content} onChange={this.props.onChange} options={this.props} />
       </div>
     );
   }
