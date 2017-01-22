@@ -9,7 +9,7 @@ import InstructorSidebarController from 'controllers/InstructorSidebarController
 import * as Firebase from 'functions/firebase';
 
 import RoomNotFound from 'pages/RoomNotFound';
-import Loading from 'pages/Loading';
+import LoadingIcon from 'parts/LoadingIcon';
 
 export default class Home extends Component {
   static propTypes = {
@@ -54,7 +54,7 @@ export default class Home extends Component {
 
     if (loading) {
       return (
-        <Loading />
+        <LoadingIcon />
       );
     } else if (roomExists) {
       return (

@@ -7,7 +7,7 @@ import StudentView from 'views/StudentView';
 
 import RoomNotFound from 'pages/RoomNotFound';
 import UserNotFound from 'pages/UserNotFound';
-import Loading from 'pages/Loading';
+import LoadingIcon from 'parts/LoadingIcon';
 
 export default class Room extends Component {
   static propTypes = {
@@ -110,7 +110,7 @@ export default class Room extends Component {
 
     if (loading) {
       return (
-        <Loading />
+        <LoadingIcon />
       );
     } else if (roomExists && userExists) {
       return (
