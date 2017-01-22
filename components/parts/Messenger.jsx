@@ -131,22 +131,10 @@ export default class Messenger extends Component {
 
 
   render() {
-    const { publicMessages, privateView } = this.state;
+    const { publicMessages } = this.state;
 
     return (
       <div className="messenger">
-        <ul className="tab tab-block">
-          <li className={classNames('tab-item', { active: !privateView })}>
-            <button onClick={() => this.setChatChannel('public')}>
-              Class
-            </button>
-          </li>
-          <li className={classNames('tab-item', { active: privateView })}>
-            <button onClick={() => this.setChatChannel('private')}>
-              Instructor
-            </button>
-          </li>
-        </ul>
         <div className="messages">
           {this.renderMessages(publicMessages)}
         </div>
