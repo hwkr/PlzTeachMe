@@ -64,7 +64,7 @@ export default class Head extends Component {
           </Link>
         </section>
         <section className="navbar-section">
-          <div className={classnames('input-group', 'input-inline', { tooltip: roomName !== '' }, 'tooltip-bottom')} data-tooltip={roomExists ? 'Oh no! That room already exists &#x1F61E;' : 'Good dank name!'}>
+          <div className={classnames('input-group', 'input-inline', { tooltip: roomName !== '' }, 'tooltip-bottom')} data-tooltip={roomExists ? 'Oh no! That room already exists :/' : 'Good dank name!'}>
             <input className="form-input" type="text" placeholder="create a room" value={roomName} onChange={this.roomNameChange} />
             <button className={classnames('btn', 'btn-primary', 'input-group-btn', { disabled: roomExists || roomName === '' })} onClick={this.createRoom}>Create</button>
           </div>
