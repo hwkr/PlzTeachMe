@@ -21,6 +21,7 @@ export default class RoomNotFound extends Component {
             javascript: '',
           },
         },
+        messages: {},
       },
     }).then(() => {
       window.location.href = `/teach/${this.props.roomName}`;

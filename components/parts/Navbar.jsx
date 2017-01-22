@@ -37,6 +37,7 @@ export default class Head extends Component {
             javascript: '',
           },
         },
+        messages: {},
       },
     }).then(() => {
       window.location.href = `/teach/${roomName}`;
