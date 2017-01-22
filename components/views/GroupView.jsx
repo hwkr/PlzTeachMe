@@ -22,7 +22,7 @@ export default class GroupView extends Component {
       <div className="container">
         <div className="columns">
           <div className="column col-12">
-            Hello
+            <h4>Group</h4>
           </div>
         </div>
         <div className="columns">
