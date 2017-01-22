@@ -5,7 +5,7 @@ import * as Firebase from 'functions/firebase';
 
 import Editor from 'components/editor/Editor';
 
-export default class StudentView extends Component {
+export default class TeacherView extends Component {
   static propTypes = {
     roomName: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
@@ -13,6 +13,7 @@ export default class StudentView extends Component {
 
   constructor(props) {
     super(props);
+
     this.ref = Firebase.getFirebaseInstance();
 
     this.state = {
@@ -31,10 +32,6 @@ export default class StudentView extends Component {
     });
   }
 
-  changeName = (e) => {
-    this.setState({ user: { userName: e.target.value } });
-  }
-
   render() {
     const { roomName, userId } = this.props;
     const { userName } = this.state.user;
@@ -43,7 +40,7 @@ export default class StudentView extends Component {
       <div className="container">
         <div className="columns">
           <div className="column col-12">
-            <input value={userName} type="text" placeholder="username" onChange={this.changeName} />
+            <h3>{userName}</h3>
           </div>
         </div>
         <div className="columns">

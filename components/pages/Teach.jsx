@@ -3,8 +3,8 @@ import classNames from 'classnames';
 
 import Icon from 'parts/Icon';
 
-import Editor from 'editor/Editor';
-// import InstructorSidebarController from 'controllers/InstructorSidebarController';
+import GroupView from 'views/GroupView';
+import TeacherView from 'views/TeacherView';
 
 import RoomNotFound from 'pages/RoomNotFound';
 import Loading from 'pages/Loading';
@@ -121,9 +121,9 @@ export default class Home extends Component {
               <div className="columns">
                 <div className="column col-12">
                   {activeUser === -1 ?
-                    <Editor editorPath={`rooms/${roomName}/instructor/editorContent`} />
+                    <GroupView roomName={roomName} />
                   :
-                    <Editor editorPath={`rooms/${roomName}/users/${users[activeUser].key}/editorContent`} />
+                    <TeacherView roomName={roomName} userId={users[activeUser].key} />
                   }
                 </div>
               </div>
