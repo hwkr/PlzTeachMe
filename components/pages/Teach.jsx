@@ -4,7 +4,7 @@ import Editor from 'editor/Editor';
 import InstructorSidebarController from 'controllers/InstructorSidebarController';
 
 import RoomNotFound from 'pages/RoomNotFound';
-import LoadingIcon from 'parts/LoadingIcon';
+import Loading from 'pages/Loading';
 
 import * as Firebase from 'functions/firebase';
 
@@ -51,7 +51,7 @@ export default class Home extends Component {
 
     if (loading) {
       return (
-        <LoadingIcon />
+        <Loading />
       );
     } else if (roomExists) {
       return (
