@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
+
+
+import Icon from 'parts/Icon';
 
 import Editor from 'editor/Editor';
-import Icon from 'parts/Icon';
+import InstructorSidebarController from 'controllers/InstructorSidebarController';
 
 import * as Firebase from 'functions/firebase';
 
-const avatarA = require('img/avatars/avatar-a.png');
-const avatarB = require('img/avatars/avatar-b.png');
-// const avatarC = require('img/avatars/avatar-c.png');
-const avatarD = require('img/avatars/avatar-d.png');
+import RoomNotFound from 'pages/RoomNotFound';
+import Loading from 'pages/Loading';
 
 export default class Home extends Component {
   static propTypes = {
@@ -21,33 +21,27 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.ref = Firebase.getFirebaseInstance();
-    const { roomName } = props.params;
 
-    this.ref.syncState(`rooms/${roomName}/users`, {
-      context: this,
-      state: 'users',
-    });
-
-    this.ref.fetch(`rooms/${roomName}/users`, {
-      context: this,
-      then: this.updateUsers,
-    });
+    this.checkRoom();
 
     this.state = {
+      loading: true,
       users: null,
       activeStudentIndex: -1,
     };
   }
 
-  updateUsers = (data) => {
-    this.setState({
-      users: data,
-    });
-  }
-
-  makeActive = (index) => {
-    this.setState({
-      activeStudentIndex: index,
+  checkRoom() {
+    const { roomName } = this.props.params;
+    this.ref.fetch(`rooms/${roomName}`, {
+      context: this,
+      then: (room) => {
+        if (room) {
+          this.setState({ loading: false, roomExists: true });
+        } else {
+          this.setState({ loading: false, roomExists: false });
+        }
+      },
     });
   }
 
@@ -55,41 +49,31 @@ export default class Home extends Component {
   // }
 
   render() {
-    const Sidebar = this.state.users != null ?
-    Object.keys(this.state.users).map((user, index) =>
-      <li key={index} className={classNames('tab-item', 'tab-student', { active: index === this.state.activeStudentIndex })} >
-        <button onClick={() => this.makeActive(index)} className="badge" data-badge="3">
-          <figure className="avatar avatar-md" data-initial="A">
-            <img src={avatarA} alt="avatar" />
-          </figure>
-        </button>
-      </li>
-    ) : <span className="loading" />;
+    const { roomName } = this.props.params;
+    const { loading, roomExists } = this.state;
 
-    return (
-      <div className="teach">
-        <div className="sidebar">
-          <ul className="tab tab-side">
-            <li className="tab-item tab-teacher">
-              <button onClick={() => this.makeActive(-1)}>
-                <figure className="avatar avatar-md">
-                  <Icon name="group" />
-                </figure>
-              </button>
-            </li>
-            {Sidebar}
-          </ul>
-        </div>
-        <main className="view">
-          <div className="container">
-            <div className="columns">
-              <div className="column col-12">
-                <Editor />
+    if (loading) {
+      return (
+        <Loading />
+      );
+    } else if (roomExists) {
+      return (
+        <div className="teach">
+          <InstructorSidebarController {...this.props} />
+          <main className="view">
+            <div className="container">
+              <div className="columns">
+                <div className="column col-12">
+                  <Editor />
+                </div>
               </div>
             </div>
-          </div>
-        </main>
-      </div>
+          </main>
+        </div>
+      );
+    }
+    return (
+      <RoomNotFound roomName={roomName} fireRef={this.ref} />
     );
   }
 }
