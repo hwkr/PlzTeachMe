@@ -1,11 +1,21 @@
 .messenger {
-  height: 100%;
+  max-height: 60vh;;
   display: flex;
   flex-direction: column;
-  flex-wrap: no-wrap;
   align-content: stretch;
 
   .content {
     flex-grow: 1;
+    flex-basis: auto;
+    min-width: 0;
+    padding: @layout-padding/2;
+    overflow-y: auto;
+  }
+
+  .messages {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    justify-content: flex-end;
   }
 }

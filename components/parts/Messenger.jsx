@@ -93,6 +93,7 @@ export default class Messenger extends Component {
         publicMessages: this.state.publicMessages.concat(currMessage),
       });
     }
+    this.setState({ inputField: '' });
   }
 
   render() {
@@ -126,10 +127,10 @@ export default class Messenger extends Component {
             </button>
           </li>
         </ul>
-
-
         <div className="content">
-          {this.state.privateView ? privateMessages : publicMessages}
+          <div className="messages">
+            {this.state.privateView ? privateMessages : publicMessages}
+          </div>
         </div>
         <div className="input-group">
           <input className="text" className="form-input" placeholder="Send a message" onChange={this.updateMessage} value={this.state.inputField} />
