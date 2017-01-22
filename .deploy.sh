@@ -6,7 +6,7 @@ LAST_COMMIT="$(git rev-parse --short HEAD)"
 # switch branches
 git clone "https://${GH_TOKEN}@${GH_REF}" site/
 cd site/
-git checkout master
+git checkout gh-pages
 rm -r *
 cd ../
 
