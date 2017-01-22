@@ -5,6 +5,8 @@ import * as Firebase from 'functions/firebase';
 
 import Editor from 'components/editor/Editor';
 
+import Messenger from 'parts/Messenger';
+
 export default class StudentView extends Component {
   static propTypes = {
     roomName: PropTypes.string.isRequired,
@@ -53,6 +55,7 @@ export default class StudentView extends Component {
           <div className="column col-12">
             <Editor editorPath={`rooms/${roomName}/users/${userId}/editorContent`} />
           </div>
+          <Messenger userId={userId} userName={userName} roomName={roomName} />
         </div>
       </div>
     );
