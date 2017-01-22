@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-const Frame = (ComposedComponent) => class extends Component {
+const Frame = (ComposedComponent, myJS) => class extends Component {
   static propTypes = {
     frameProps: React.PropTypes.object,
   }
@@ -18,7 +18,7 @@ const Frame = (ComposedComponent) => class extends Component {
     ), this.el);
   }
 
-  render = () => <iframe {...this.props.frameProps} />;
+  render = () => <iframe id="myframe" {...this.props.frameProps} />;
 
   componentDidMount = () => {
     const frame = ReactDOM.findDOMNode(this); //eslint-disable-line
@@ -26,6 +26,9 @@ const Frame = (ComposedComponent) => class extends Component {
     const el = document.createElement('div');
     frameBody.appendChild(el);
     this.el = el;
+
+    const rez = document.getElementById('myframe');
+    rez.contentWindow.eval(myJS); // Since scripts don't work, run eval on the window.
 
     this.updateIFrameContents();
   }

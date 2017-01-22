@@ -86,7 +86,7 @@ export default class Editor extends React.Component {
 
   render() {
     const { loading, content } = this.state;
-    const PreviewFrame = frame(Preview);
+    const PreviewFrame = frame(Preview, this.state.content.javascript);
     return (
       <div className="editor columns">
         <div className="editor-text-editors column col-5">
