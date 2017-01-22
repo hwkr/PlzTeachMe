@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import * as Firebase from 'functions/firebase';
 import uuidV4 from 'uuid/v4';
-
-import Icon from 'parts/Icon';
+import { Chance } from 'chance';
 
 import StudentView from 'views/StudentView';
+
+import RoomNotFound from 'pages/RoomNotFound';
+import UserNotFound from 'pages/UserNotFound';
+import Loading from 'pages/Loading';
 
 export default class Room extends Component {
   static propTypes = {
@@ -31,10 +34,11 @@ export default class Room extends Component {
   createUserId = () => {
     const { roomName } = this.props.params;
     const userId = uuidV4();
+    const chance = new Chance();
     this.ref.post(`rooms/${roomName}/users/${userId}`, {
       data: {
         user: {
-          userName: '',
+          userName: `${chance.first()} ${chance.last()}`,
         },
         editorContent: {
           html: '',
@@ -106,11 +110,7 @@ export default class Room extends Component {
 
     if (loading) {
       return (
-        <div className="container">
-          <div className="flex flex-center fill-page">
-            <span className="loading loading-lg" />
-          </div>
-        </div>
+        <Loading />
       );
     } else if (roomExists && userExists) {
       return (
@@ -118,35 +118,11 @@ export default class Room extends Component {
       );
     } else if (roomExists) {
       return (
-        <div className="container">
-          <div className="flex flex-center fill-page">
-            <div className="col-md-12 col-6">
-              <div className="empty">
-                <Icon name="warning" />
-                <p className="empty-title">User not Found</p>
-                <p className="empty-meta">Hmm, we couldn't find that user in the room, <b>{roomName}</b>.</p>
-                <a className="empty-action btn btn-primary" href={`/room/${roomName}`}>Create a new user in <b>{roomName}</b></a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <UserNotFound roomName={roomName} />
       );
     }
     return (
-      <div className="container">
-        <div className="flex flex-center fill-page">
-          <div className="col-md-12 col-6">
-            <div className="empty">
-              <Icon name="warning" />
-              <p className="empty-title">Room not Found</p>
-              <p className="empty-meta">We couldn't find the room, <b>{roomName}</b>.</p>
-              <button className="empty-action btn btn-primary" onClick={this.createRoom}>
-                Create <b>{roomName}</b>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <RoomNotFound roomName={roomName} fireRef={this.ref} />
     );
   }
 }
