@@ -4,6 +4,7 @@
   /* Set height, width, borders, and global font properties here */
   font-family: @mono-font-family;
   color: @body-font-color;
+  height: 16rem;
 }
 
 /* PADDING */
@@ -16,15 +17,15 @@
 }
 
 .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
-  background-color: white; /* The little square between H and V scrollbars */
+  background-color: @body-bg; /* The little square between H and V scrollbars */
 }
 
 /* GUTTER */
 
 .CodeMirror-gutters {
+  background: darken(@body-bg, 5%);
   white-space: nowrap;
 }
-.CodeMirror-linenumbers {}
 .CodeMirror-linenumber {
   padding: 0 3px 0 5px;
   min-width: 20px;
@@ -80,9 +81,6 @@
   100% {}
 }
 
-/* Can style cursor different in overwrite (non-insert) mode */
-.CodeMirror-overwrite .CodeMirror-cursor {}
-
 .cm-tab { display: inline-block; text-decoration: inherit; }
 
 .CodeMirror-rulers {
@@ -111,10 +109,10 @@
 .cm-s-default .cm-atom {color: #219;}
 .cm-s-default .cm-number {color: #164;}
 .cm-s-default .cm-def {color: #00f;}
-.cm-s-default .cm-variable,
-.cm-s-default .cm-punctuation,
-.cm-s-default .cm-property,
-.cm-s-default .cm-operator {}
+// .cm-s-default .cm-variable,
+// .cm-s-default .cm-punctuation,
+// .cm-s-default .cm-property,
+// .cm-s-default .cm-operator {}
 .cm-s-default .cm-variable-2 {color: #05a;}
 .cm-s-default .cm-variable-3 {color: #085;}
 .cm-s-default .cm-comment {color: #a50;}
@@ -266,8 +264,6 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   z-index: 2;
   overflow: auto;
 }
-
-.CodeMirror-widget {}
 
 .CodeMirror-code {
   outline: none;
