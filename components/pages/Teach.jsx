@@ -36,6 +36,17 @@ export default class Home extends Component {
     };
   }
 
+  getInitials(nameString) {
+    const firstLast = nameString.split(' ');
+    let initials;
+    if (firstLast.length === 1) {
+      initials = firstLast[0][0];
+    } else {
+      initials = `${firstLast[0].charAt(0)}${firstLast[firstLast.length - 1].charAt(0)}`;
+    }
+    return initials;
+  }
+
   getUsers(roomName) {
     this.ref.syncState(`rooms/${roomName}/users`, {
       context: this,
@@ -74,20 +85,6 @@ export default class Home extends Component {
     this.setState({
       activeStudentIndex: index,
     });
-  }
-
-  // static defaultProps = {
-  // }
-
-  getInitials(nameString) {
-    const firstLast = nameString.split(' ');
-    let initials;
-    if (firstLast.length === 1) {
-      initials = firstLast[0][0];
-    } else {
-      initials = `${firstLast[0].charAt(0)}${firstLast[firstLast.length - 1].charAt(0)}`;
-    }
-    return initials;
   }
 
   render() {
