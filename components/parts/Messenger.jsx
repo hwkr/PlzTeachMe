@@ -38,6 +38,11 @@ export default class Messenger extends Component {
     };
   }
 
+  componentDidUpdate() {
+    const elem = document.getElementById('messagesContainer');
+    elem.scrollTop = elem.scrollHeight;
+  }
+
   getInitials(nameString) {
     const firstLast = nameString.split(' ');
     let initials;
@@ -115,11 +120,6 @@ export default class Messenger extends Component {
     if (e.key === 'Enter') {
       this.sendMessage();
     }
-  }
-
-  componentDidUpdate() {
-    const elem = document.getElementById("messagesContainer");
-    elem.scrollTop = elem.scrollHeight;
   }
 
   renderMessages = (messages) => {
