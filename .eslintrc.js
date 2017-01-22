@@ -23,7 +23,8 @@ module.exports = {
   },
   "rules": {
     "max-len": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "no-console": ["warn", { allow: ["warn", "error"] }]
   },
   "plugins": [
     "react"

@@ -3,5 +3,12 @@
   "description": "An online learning tool.",
   "host": "plzteach.me",
   "tracking_id": "TODO",
-  "themecolor": "#CCCCCC"
+  "themecolor": "#CCCCCC",
+  "social": [
+    {
+      "label": "GitHub",
+      "icon": "social-github",
+      "href": "http://github.com/hwkr/plzteachme"
+    }
+  ]
 }
