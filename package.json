@@ -4,7 +4,8 @@
   "description": "An online teaching platform",
   "scripts": {
     "start": "webpack -d --watch & live-server --entry-file=404.html",
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "deploy": "bash ./.deploy.sh"
   },
   "repository": {
     "type": "git",
