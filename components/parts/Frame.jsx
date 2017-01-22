@@ -28,7 +28,7 @@ const Frame = (ComposedComponent, myJS) => class extends Component {
     this.el = el;
 
     const rez = document.getElementById('myframe');
-    rez.contentWindow.eval(myJS); // Since scripts don't work, run eval on the window.
+    rez.contentWindow.eval(myJS); // Since scripts don't work, run eval on the iframe.
 
     this.updateIFrameContents();
   }
