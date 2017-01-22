@@ -117,6 +117,11 @@ export default class Messenger extends Component {
     }
   }
 
+  componentDidUpdate() {
+    const elem = document.getElementById("messagesContainer");
+    elem.scrollTop = elem.scrollHeight;
+  }
+
   renderMessages = (messages) => {
     const { userId } = this.props;
 
@@ -139,7 +144,7 @@ export default class Messenger extends Component {
 
     return (
       <div className="messenger">
-        <div className="messages">
+        <div id="messagesContainer" className="messages">
           {this.renderMessages(publicMessages)}
         </div>
         <div className="input-group">
