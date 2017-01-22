@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 
 import * as Firebase from 'functions/firebase';
 
@@ -37,7 +38,6 @@ export default class Messenger extends Component {
   }
 
   setChatChannel(channel) {
-    console.log(`Channel set to ${channel}`);
     this.setState({
       privateView: channel === 'private',
     });
@@ -110,15 +110,31 @@ export default class Messenger extends Component {
       </div>
     );
 
+    const { privateView } = this.state;
+
     return (
       <div className="messenger">
-        <button className="instructorChat" onClick={() => this.setChatChannel('private')} >Instructor</button>
-        <button className="allChat" onClick={() => this.setChatChannel('public')} >Class</button>
+        <ul className="tab tab-block">
+          <li className={classNames('tab-item', { active: !privateView })}>
+            <button onClick={() => this.setChatChannel('public')}>
+              Class
+            </button>
+          </li>
+          <li className={classNames('tab-item', { active: privateView })}>
+            <button onClick={() => this.setChatChannel('private')}>
+              Instructor
+            </button>
+          </li>
+        </ul>
+
+
         <div className="content">
           {this.state.privateView ? privateMessages : publicMessages}
         </div>
-        <input onChange={this.updateMessage} type="text" placeholder="create a room" value={this.state.inputField} />
-        <button onClick={this.sendMessage}>Send Message</button>
+        <div className="input-group">
+          <input className="text" className="form-input" placeholder="Send a message" onChange={this.updateMessage} value={this.state.inputField} />
+          <button className="btn btn-primary input-group-btn" onClick={this.sendMessage}>Send</button>
+        </div>
       </div>
     );
   }
