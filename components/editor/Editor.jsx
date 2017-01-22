@@ -89,12 +89,12 @@ export default class Editor extends React.Component {
     const PreviewFrame = frame(Preview);
     return (
       <div className="editor columns">
-        <div className="editor-text-editors column col-4">
+        <div className="editor-text-editors column col-5">
           <TextEditor mode="html" content={content.html} onChange={this.setHtml} />
           <TextEditor mode="css" content={content.css} onChange={this.setCss} />
           <TextEditor mode="javascript" content={content.javascript} onChange={this.setJavascript} />
         </div>
-        <div className="editor-preview column col-8">
+        <div className="editor-preview column col-7">
           { loading ?
             <div className="empty">
               <Icon name="flash" />
