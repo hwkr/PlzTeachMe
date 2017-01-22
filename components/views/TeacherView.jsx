@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import * as Firebase from 'functions/firebase';
 
-// import Icon from 'parts/Icon';
-
 import Editor from 'components/editor/Editor';
 
 export default class TeacherView extends Component {

@@ -85,7 +85,6 @@ export default class Messenger extends Component {
   }
 
   sendMessage = () => {
-
     const time = Date.now();
     const content = this.state.inputField;
     const currMessage = [{
@@ -112,6 +111,12 @@ export default class Messenger extends Component {
     this.setState({ inputField: '' });
   }
 
+  checkKeys = (e) => {
+    if (e.key === 'Enter') {
+      this.sendMessage();
+    }
+  }
+
   renderMessages = (messages) => {
     const { userId } = this.props;
 
@@ -129,7 +134,6 @@ export default class Messenger extends Component {
     );
   }
 
-
   render() {
     const { publicMessages } = this.state;
 
@@ -139,7 +143,7 @@ export default class Messenger extends Component {
           {this.renderMessages(publicMessages)}
         </div>
         <div className="input-group">
-          <input className="text" className="form-input" placeholder="Send a message" onChange={this.updateMessage} value={this.state.inputField} />
+          <input className="text" className="form-input" placeholder="Send a message" onChange={this.updateMessage} onKeyPress={this.checkKeys} value={this.state.inputField} />
           <button className="btn btn-primary input-group-btn" onClick={this.sendMessage}>Send</button>
         </div>
       </div>
