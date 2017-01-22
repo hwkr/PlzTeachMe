@@ -1,51 +1,14 @@
-.homeTitle {
-    text-transform: uppercase;
-}
-.homeInput {
-    color: #333333;
-}
-.homeBox {
-    background-color: #333333;
-    margin: 100px;
-}
-.homeBox .input-group-addon {
-    border: 0.8rem solid #666; 
-    border-right: none;   
-}
-.homeBox .homeInput {
-    border: 0.8rem solid #666; 
-    border-left: none;  
-}
-.homeBox .input-lg {
-    padding: 2rem .8rem;
-}
-.brandLogo {
-    padding: 10px;
-    width: 20rem;
-}
-.btn-home {
-    background-color: #6290C3;
-    color: #FFFFFF;
-    &:hover {
-        color: #6290C3;
-        background-color: #FFFFFF;
-    }
-}
-.flex-container {
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
+.home {
+  .hero {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+
+    min-height: 60vh;
+    .cta {
+      font-size: 4*@body-font-size;
+      margin-bottom: @layout-margin;
+    }
+  }
 }
-.row {
-    width: auto;
-}
-.flex-item {
-    text-align: center;
-}
+

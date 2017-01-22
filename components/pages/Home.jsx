@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-// import Config from 'Config';
-
 import * as Firebase from 'functions/firebase';
+
+import Navbar from 'parts/Navbar';
 
 export default class Home extends Component {
   // static propTypes = {
@@ -13,7 +13,7 @@ export default class Home extends Component {
     super(props);
     this.ref = Firebase.getFirebaseInstance();
     this.state = {
-      isRoomNameAvailable: false,
+      roomExists: false,
       roomName: '',
     };
   }
@@ -21,26 +21,9 @@ export default class Home extends Component {
   // static defaultProps = {
   // }
 
-  createRoom = () => {
+  joinRoom = () => {
     const { roomName } = this.state;
-    this.ref.post(`rooms/${roomName}`, {
-      data: {
-        title: roomName,
-        users: {},
-        instructor: {
-          editorContent: {
-            html: '',
-            css: '',
-            javascript: '',
-          },
-        },
-      },
-    }).then(() => {
-      window.location.href = `/teach/${roomName}`;
-    }).catch(err => {
-      // handle error
-      console.error(err);
-    });
+    window.location.href = `/room/${roomName}`;
   }
 
   roomNameChange = (e) => {
@@ -49,62 +32,29 @@ export default class Home extends Component {
 
     this.ref.fetch(`rooms/${val}`, {
       context: this,
-      then: (room) => { this.setState({ isRoomNameAvailable: room == null }); },
+      then: (room) => { this.setState({ roomExists: room !== null }); },
     });
   }
 
-
   render() {
-    const { roomName, isRoomNameAvailable } = this.state;
+    const { roomName, roomExists } = this.state;
     return (
       <div className="home">
 
-        <header className="navbar">
-          <section className="navbar-section">
-            <a href="#" className="navbar-brand">
-              <img className="brandLogo" src="../../img/logo/logoFull.svg" alt="Branc Logo"/>
-            </a>
-          </section>
-          <section>
-            <a href="#" target="_blank">
-              <i></i>
-            </a>
-            <a href="#" target="_blank">
-              <i></i>
-            </a>
-          </section>
-        </header>
-
-
-        {/* Welcome Message */}
+        {/* Header */}
+        <Navbar />
         <div className="container">
-          <div className="columns">
-            <div className="column col-12 text-center">
-              <h1 className="homeTitle">
-                Welcome
-              </h1>
+          <div className="hero">
+            <div className="col-md-12 col-8">
+              <p className="cta">
+                Pair program with me. Join a room and start learning.
+              </p>
             </div>
-          </div>
-        </div>
-        {/* Input Bar */}
-        <div className="flex-container container">
-          <div className="columns">
-            <div className="row column col-6">
-              <div className="flex-item">
-                <div className="input-group homeBox">
-                  <span className="input-group-addon addon-lg">plzteach.me/room/</span>
-                  <input type="text" className="form-input input-lg homeInput" placeholder="Room Name" value={ roomName } onChange={this.roomNameChange} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Start Plz Button */}
-        <div className="flex-container container">
-          <div className="columns">
-            <div className="row column col-6">
-              <div className="flex-item">
-                <button className={classnames('btn', 'btn-home', 'input-group-btn', { disabled: !isRoomNameAvailable })} onClick={this.createRoom}>Start Plz</button>
+            <div className="col-md-12 col-6">
+              <div className={classnames('input-group', { tooltip: !roomExists && roomName !== '' }, 'tooltip-bottom')} data-tooltip="Uh oh! We can't find that room  &#x1F631;">
+                <span className="input-group-addon addon-lg">plzteach.me/room/</span>
+                <input type="text" className="form-input input-lg" placeholder="Room Name" value={roomName} onChange={this.roomNameChange} />
+                <button className={classnames({ disabled: !roomExists }, 'btn', 'btn-primary', 'btn-lg', 'input-group-btn')} onClick={this.joinRoom}>Join</button>
               </div>
             </div>
           </div>
