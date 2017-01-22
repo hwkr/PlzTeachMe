@@ -13,7 +13,7 @@ export default class Home extends Component {
     super(props);
     this.ref = Firebase.getFirebaseInstance();
     this.state = {
-      isRoomNameAvailable: false,
+      roomExists: false,
       roomName: '',
     };
   }
@@ -36,19 +36,25 @@ export default class Home extends Component {
     });
   }
 
+  joinRoom = () => {
+    const { roomName } = this.state;
+    console.log(roomName);
+    window.location.href = `/room/${roomName}`;
+  }
+
   roomNameChange = (e) => {
     const val = e.target.value;
     this.setState({ roomName: val });
 
     this.ref.fetch(`rooms/${val}`, {
       context: this,
-      then: (room) => { this.setState({ isRoomNameAvailable: room == null }); },
+      then: (room) => { this.setState({ roomExists: room !== null }); },
     });
   }
 
 
   render() {
-    const { roomName, isRoomNameAvailable } = this.state;
+    const { roomName, roomExists } = this.state;
     return (
       <div className="home">
 
@@ -62,10 +68,10 @@ export default class Home extends Component {
               </p>
             </div>
             <div className="col-md-12 col-6">
-              <div className="input-group">
+              <div className={classnames('input-group', { 'has-danger': !roomExists && roomName !== '' }, { tooltip: !roomExists && roomName !== '' })} data-tooltip="Room does not exist">
                 <span className="input-group-addon addon-lg">plzteach.me/room/</span>
                 <input type="text" className="form-input input-lg" placeholder="Room Name" value={roomName} onChange={this.roomNameChange} />
-                <button className={classnames('btn', 'btn-primary', 'btn-lg', 'input-group-btn', { disabled: isRoomNameAvailable })} onChange={this.checkName}>Join</button>
+                <button className={classnames({ disabled: !roomExists }, 'btn', 'btn-primary', 'btn-lg', 'input-group-btn')} onClick={this.joinRoom}>Join</button>
               </div>
             </div>
           </div>
