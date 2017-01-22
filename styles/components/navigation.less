@@ -44,6 +44,12 @@
     border-bottom: .1rem solid @control-color;
     margin-top: 0;
 
+    button {
+      background: none;
+      border: none;
+      outline: none;
+    }
+
     a, button {
       border-bottom: .2rem solid transparent;
       color: @body-font-color;
@@ -60,7 +66,7 @@
 
     &.active a,
     &.active button,
-    a.active, 
+    a.active,
     button.active {
       border-bottom-color: darken(@core-color, 10%);
       color: darken(@core-link-color, 10%);
