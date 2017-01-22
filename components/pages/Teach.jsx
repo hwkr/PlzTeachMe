@@ -1,15 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 
-
-import Icon from 'parts/Icon';
-
 import Editor from 'editor/Editor';
 import InstructorSidebarController from 'controllers/InstructorSidebarController';
 
-import * as Firebase from 'functions/firebase';
-
 import RoomNotFound from 'pages/RoomNotFound';
 import LoadingIcon from 'parts/LoadingIcon';
+
+import * as Firebase from 'functions/firebase';
 
 export default class Home extends Component {
   static propTypes = {
