@@ -7,7 +7,7 @@ import * as Firebase from 'functions/firebase';
 import Icon from 'parts/Icon';
 import Config from 'Config';
 
-const brand = require('img/logo/logoFull.svg');
+import brand from 'img/logo/logoFull.svg';
 
 export default class Head extends Component {
   static propTypes = {
