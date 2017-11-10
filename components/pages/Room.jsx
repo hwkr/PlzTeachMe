@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import * as Firebase from 'functions/firebase';
 import uuidV4 from 'uuid/v4';
-import { Chance } from 'chance';
 
 import StudentView from 'views/StudentView';
 
@@ -14,6 +13,11 @@ export default class Room extends Component {
     params: PropTypes.shape({
       roomName: PropTypes.string.isRequired,
       userId: PropTypes.string,
+    }),
+    location: PropTypes.shape({
+      query: PropTypes.shape({
+        userName: PropTypes.string,
+      }),
     }),
   }
 
@@ -34,16 +38,14 @@ export default class Room extends Component {
   createUserId = () => {
     const { roomName } = this.props.params;
     const userId = uuidV4();
-    const chance = new Chance();
     this.ref.post(`rooms/${roomName}/users/${userId}`, {
       data: {
         user: {
-          userName: `${chance.first()} ${chance.last()}`,
+          userName: this.props.location.query.userName || '',
         },
         editorContent: {
           html: '',
           css: '',
-          javascript: '',
         },
       },
     }).then(() => {

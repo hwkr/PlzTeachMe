@@ -16,6 +16,7 @@ export default class Home extends Component {
     this.state = {
       roomExists: false,
       roomName: '',
+      userName: '',
     };
   }
 
@@ -23,8 +24,8 @@ export default class Home extends Component {
   // }
 
   joinRoom = () => {
-    const { roomName } = this.state;
-    window.location.href = `/room/${roomName}`;
+    const { roomName, userName } = this.state;
+    window.location.href = `/room/${roomName}?userName=${userName}`;
   }
 
   roomNameChange = (e) => {
@@ -37,8 +38,14 @@ export default class Home extends Component {
     });
   }
 
+  userNameChange = (e) => {
+    const val = e.target.value;
+    this.setState({ userName: val });
+  }
+
   render() {
-    const { roomName, roomExists } = this.state;
+    const { roomName, userName, roomExists } = this.state;
+    const isValid = roomExists && userName !== '';
     return (
       <div className="home fill-page">
 
@@ -52,11 +59,13 @@ export default class Home extends Component {
                 Pair program with me. Join a room and start learning.
               </p>
             </div>
-            <div className="col-md-12 col-6">
+            <div className="col-md-12 col-8">
               <div className={classnames('input-group', { tooltip: !roomExists && roomName !== '' }, 'tooltip-bottom')} data-tooltip="Uh oh! We can't find that room  &#x1F631;">
                 <span className="input-group-addon addon-lg">plzteach.me/room/</span>
                 <input type="text" className="form-input input-lg" placeholder="Room Name" value={roomName} onChange={this.roomNameChange} />
-                <button className={classnames({ disabled: !roomExists }, 'btn', 'btn-primary', 'btn-lg', 'input-group-btn')} onClick={this.joinRoom}>Join</button>
+                <span className="input-group-addon addon-lg">?userName=</span>
+                <input type="text" className="form-input input-lg" placeholder="Your Name" value={userName} onChange={this.userNameChange} />
+                <button className={classnames({ disabled: !isValid }, 'btn', 'btn-primary', 'btn-lg', 'input-group-btn')} onClick={this.joinRoom}>Join</button>
               </div>
             </div>
           </div>
@@ -67,5 +76,3 @@ export default class Home extends Component {
     );
   }
 }
-
-
