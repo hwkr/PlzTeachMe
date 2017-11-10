@@ -23,8 +23,11 @@ export default class Home extends Component {
   // static defaultProps = {
   // }
 
-  joinRoom = () => {
-    const { roomName, userName } = this.state;
+  joinRoom = (e) => {
+    e.preventDefault();
+    const { roomName, roomExists, userName } = this.state;
+    if (!roomExists || userName === '') return;
+
     window.location.href = `/room/${roomName}?userName=${userName}`;
   }
 
@@ -60,13 +63,13 @@ export default class Home extends Component {
               </p>
             </div>
             <div className="col-md-12 col-8">
-              <div className={classnames('input-group', { tooltip: !roomExists && roomName !== '' }, 'tooltip-bottom')} data-tooltip="Uh oh! We can't find that room  &#x1F631;">
+              <form className={classnames('input-group', { tooltip: !roomExists && roomName !== '' }, 'tooltip-bottom')} data-tooltip="Uh oh! We can't find that room  &#x1F631;" onSubmit={this.joinRoom}>
                 <span className="input-group-addon addon-lg">plzteach.me/room/</span>
                 <input type="text" className="form-input input-lg" placeholder="Room Name" value={roomName} onChange={this.roomNameChange} />
                 <span className="input-group-addon addon-lg">?userName=</span>
                 <input type="text" className="form-input input-lg" placeholder="Your Name" value={userName} onChange={this.userNameChange} />
-                <button className={classnames({ disabled: !isValid }, 'btn', 'btn-primary', 'btn-lg', 'input-group-btn')} onClick={this.joinRoom}>Join</button>
-              </div>
+                <button className={classnames({ disabled: !isValid }, 'btn', 'btn-primary', 'btn-lg', 'input-group-btn')} type="submit">Join</button>
+              </form>
             </div>
           </div>
         </div>
