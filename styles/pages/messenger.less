@@ -10,15 +10,22 @@
   }
 
   .messages {
-    flex-grow: 1;
-    flex-basis: auto;
-    min-height: 0;
-    overflow-y: auto;
+    flex: 1;
 
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .messages-scroll {
+    display: flex;
+    flex-direction: column;
     padding: @layout-padding/2;
 
     .message {
       display: flex;
+      flex-shrink: 0;
       margin: @layout-margin/8 0;
 
       .body {

@@ -11,7 +11,6 @@ import Preview from './Preview';
 function generateCombinedHtml(content) {
   return (
     `
-      <script>${content.javascript}</script>
       <style>${content.css}</style>
       <div>${content.html}</div>
     `
@@ -72,14 +71,6 @@ export default class Editor extends React.Component {
     this.setState({
       content: {
         css: content,
-      },
-    });
-  }
-
-  setJavascript = (content) => {
-    this.setState({
-      content: {
-        javascript: content,
       },
     });
   }
