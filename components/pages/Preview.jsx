@@ -27,7 +27,7 @@ export default class ExampleComponent extends Component {
 
   componentDidMount() {
     const { roomName, userId } = this.props.params;
-    const path = `rooms/${roomName}/users/${userId}/editorContent`;
+    const path = userId === 'instructor' ? `rooms/${roomName}/instructor/editorContent` : `rooms/${roomName}/users/${userId}/editorContent`;
 
     this.unmountRef = this.ref.syncState(path, {
       context: this,
