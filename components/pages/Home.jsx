@@ -37,7 +37,10 @@ export default class Home extends Component {
 
     this.ref.fetch(`rooms/${val}`, {
       context: this,
-      then: (room) => { this.setState({ roomExists: room !== null }); },
+      then: (room) => {
+        const isEmpty = Object.keys(room).length === 0 || !room;
+        this.setState({ roomExists: !isEmpty });
+      },
     });
   }
 
@@ -63,7 +66,7 @@ export default class Home extends Component {
               </p>
             </div>
             <div className="col-md-12 col-10">
-              <form className={classnames({ tooltip: !roomExists && roomName !== '' }, 'tooltip-bottom', 'flex')} data-tooltip="Uh oh! We can't find that room  &#x1F631;" onSubmit={this.joinRoom}>
+              <form className={classnames({ tooltip: !roomExists && roomName !== '' }, 'tooltip-bottom', 'tooltip-persistent', 'flex')} data-tooltip="Uh oh! We can't find that room  &#x1F631;" onSubmit={this.joinRoom}>
                 <div className="col-10">
                   <div className="input-group">
                     <span className="input-group-addon addon-lg">plzteach.me/room/</span>

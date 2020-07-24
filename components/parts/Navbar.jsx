@@ -17,6 +17,7 @@ export default class Head extends Component {
 
     this.state = {
       roomExists: true,
+      loading: false,
       roomName: '',
     };
   }
@@ -51,17 +52,18 @@ export default class Head extends Component {
     const val = e.target.value;
     this.setState({ roomName: val });
 
+    this.setState({ loading: true });
     this.ref.fetch(`rooms/${val}`, {
       context: this,
       then: (room) => {
         const isEmpty = Object.keys(room).length === 0 || !room;
-        this.setState({ roomExists: !isEmpty });
+        this.setState({ roomExists: !isEmpty, loading: false });
       },
     });
   }
 
   render() {
-    const { roomName, roomExists } = this.state;
+    const { roomName, roomExists, loading } = this.state;
     return (
       <header className="navbar">
         <section className="navbar-section">
@@ -70,9 +72,9 @@ export default class Head extends Component {
           </Link>
         </section>
         <section className="navbar-section">
-          <form className={classnames('input-group', 'input-inline', { tooltip: roomName !== '' }, 'tooltip-bottom')} data-tooltip={roomExists ? 'Oh no! That room already exists 😞' : 'Sweet name! 👍'} onSubmit={this.createRoom}>
+          <form className={classnames('input-group', 'input-inline', { tooltip: roomName !== '' && !loading }, 'tooltip-bottom', 'tooltip-persistent')} data-tooltip={roomExists ? 'Oh no! That room already exists 😞' : 'Sweet name! 👍'} onSubmit={this.createRoom}>
             <input className="form-input" type="text" placeholder="create a room" value={roomName} onChange={this.roomNameChange} />
-            <button className={classnames('btn', 'btn-primary', 'input-group-btn', { disabled: roomExists || roomName === '' })} type="submit">Create</button>
+            <button className={classnames('btn', 'btn-primary', 'input-group-btn', { loading }, { disabled: roomExists || roomName === '' })} type="submit">Create</button>
           </form>
         </section>
       </header>
