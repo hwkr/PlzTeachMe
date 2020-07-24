@@ -5,7 +5,7 @@ node_js:
 - '6'
 branches:
   only:
-  - deploy
+  - master
 env:
   global:
   - GH_REF: github.com/hwkr/PlzTeachMe
