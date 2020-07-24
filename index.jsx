@@ -15,6 +15,7 @@ import App from 'App';
 import Home from 'pages/Home';
 import Teach from 'pages/Teach';
 import Room from 'pages/Room';
+import Preview from 'pages/Preview';
 import PageNotFound from 'pages/PageNotFound';
 
 import ExampleComponent from 'pages/ExampleComponent';
@@ -31,9 +32,10 @@ const routes = (
     <IndexRoute component={Home} />
 
     <Route path="teach/:roomName" mapMenuTitle="Teach" component={Teach} />
-    <Route path="room/:roomName" mapMenuTitle="Room" component={Room}>
+    <Route path="room/:roomName/" mapMenuTitle="Room" component={Room}>
       <Route path=":userId" />
     </Route>
+    <Route path="room/:roomName/:userId/preview" mapMenuTitle="Preview" component={Preview} />
     <Route path="example" mapMenuTitle="Example" component={ExampleComponent}>
       <Route path="two-deep" mapMenuTitle="Two Deep" component={ExampleTwoDeepComponent} />
     </Route>

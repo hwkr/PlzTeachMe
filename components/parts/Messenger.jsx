@@ -144,8 +144,10 @@ export default class Messenger extends Component {
 
     return (
       <div className="messenger">
-        <div id="messagesContainer" className="messages">
-          {this.renderMessages(publicMessages)}
+        <div className="messages" id="messagesContainer">
+          <div className="messages-scroll">
+            {this.renderMessages(publicMessages)}
+          </div>
         </div>
         <div className="input-group">
           <input className="text" className="form-input" placeholder="Send a message" onChange={this.updateMessage} onKeyPress={this.checkKeys} value={this.state.inputField} />

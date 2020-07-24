@@ -21,8 +21,11 @@ export default class Head extends Component {
     };
   }
 
-  createRoom = () => {
-    const { roomName } = this.state;
+  createRoom = (e) => {
+    e.preventDefault();
+    const { roomName, roomExists } = this.state;
+    if (roomExists) return;
+
     this.ref.post(`rooms/${roomName}`, {
       data: {
         title: roomName,
@@ -50,7 +53,10 @@ export default class Head extends Component {
 
     this.ref.fetch(`rooms/${val}`, {
       context: this,
-      then: (room) => { this.setState({ roomExists: room !== null }); },
+      then: (room) => {
+        const isEmpty = Object.keys(room).length === 0 || !room;
+        this.setState({ roomExists: !isEmpty });
+      },
     });
   }
 
@@ -60,14 +66,14 @@ export default class Head extends Component {
       <header className="navbar">
         <section className="navbar-section">
           <Link to="/" className="navbar-brand">
-            <img className="brand" src={brand} alt="Branc Logo" />
+            <img className="brand" src={brand} alt="Brand Logo" />
           </Link>
         </section>
         <section className="navbar-section">
-          <div className={classnames('input-group', 'input-inline', { tooltip: roomName !== '' }, 'tooltip-bottom')} data-tooltip={roomExists ? 'Oh no! That room already exists 😞' : 'Sweet name! 👍'}>
+          <form className={classnames('input-group', 'input-inline', { tooltip: roomName !== '' }, 'tooltip-bottom')} data-tooltip={roomExists ? 'Oh no! That room already exists 😞' : 'Sweet name! 👍'} onSubmit={this.createRoom}>
             <input className="form-input" type="text" placeholder="create a room" value={roomName} onChange={this.roomNameChange} />
-            <button className={classnames('btn', 'btn-primary', 'input-group-btn', { disabled: roomExists || roomName === '' })} onClick={this.createRoom}>Create</button>
-          </div>
+            <button className={classnames('btn', 'btn-primary', 'input-group-btn', { disabled: roomExists || roomName === '' })} type="submit">Create</button>
+          </form>
         </section>
       </header>
     );

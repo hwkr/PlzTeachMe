@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import CodeMirror from 'react-codemirror';
 
 export default class TextEditor extends React.Component {
   static propTypes = {
-    mode: PropTypes.string.isRequired,
+    mode: PropTypes.oneOf(['html', 'css']).isRequired,
     onChange: PropTypes.func.isRequired,
     content: PropTypes.string.isRequired,
     editorType: PropTypes.string,
