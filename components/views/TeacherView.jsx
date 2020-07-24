@@ -62,7 +62,7 @@ export default class TeacherView extends Component {
         </div>
         <div className="columns">
           <div className="column col-9">
-            <Editor editorPath={`rooms/${roomName}/users/${userId}/editorContent`} />
+            <Editor editorPath={`rooms/${roomName}/users/${userId}/editorContent`} previewUrl={`/room/${roomName}/${userId}/preview`} />
           </div>
           <div className="editor-preview column col-3">
             <Messenger userId="Instructor" userName="Instructor" roomName={roomName} />

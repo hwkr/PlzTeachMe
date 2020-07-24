@@ -53,7 +53,10 @@ export default class Head extends Component {
 
     this.ref.fetch(`rooms/${val}`, {
       context: this,
-      then: (room) => { this.setState({ roomExists: room !== null }); },
+      then: (room) => {
+        const isEmpty = Object.keys(room).length === 0 || !room;
+        this.setState({ roomExists: !isEmpty });
+      },
     });
   }
 
@@ -63,7 +66,7 @@ export default class Head extends Component {
       <header className="navbar">
         <section className="navbar-section">
           <Link to="/" className="navbar-brand">
-            <img className="brand" src={brand} alt="Branc Logo" />
+            <img className="brand" src={brand} alt="Brand Logo" />
           </Link>
         </section>
         <section className="navbar-section">

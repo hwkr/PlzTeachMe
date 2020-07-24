@@ -3,23 +3,13 @@ import React, { PropTypes } from 'react';
 import * as Firebase from 'functions/firebase';
 
 import Icon from 'parts/Icon';
-import frame from 'parts/Frame';
 
 import TextEditor from './TextEditor';
-import Preview from './Preview';
-
-function generateCombinedHtml(content) {
-  return (
-    `
-      <style>${content.css}</style>
-      <div>${content.html}</div>
-    `
-  );
-}
 
 export default class Editor extends React.Component {
   static propTypes = {
     editorPath: PropTypes.string,
+    previewUrl: PropTypes.string,
   }
 
   constructor(props) {
@@ -27,7 +17,6 @@ export default class Editor extends React.Component {
     this.ref = Firebase.getFirebaseInstance();
 
     this.state = {
-      loading: false,
       content: {
         html: '',
         css: '',
@@ -38,9 +27,9 @@ export default class Editor extends React.Component {
 
 
   componentDidMount() {
-    const { editorPath } = this.props;
+    const path = `${this.props.editorPath}`;
 
-    this.unmountRef = this.ref.syncState(editorPath, {
+    this.unmountRef = this.ref.syncState(path, {
       context: this,
       state: 'content',
     });
@@ -62,7 +51,7 @@ export default class Editor extends React.Component {
   setHtml = (content) => {
     this.setState({
       content: {
-        html: content,
+        html: content || '',
       },
     });
   }
@@ -70,14 +59,14 @@ export default class Editor extends React.Component {
   setCss = (content) => {
     this.setState({
       content: {
-        css: content,
+        css: content || '',
       },
     });
   }
 
   render() {
-    const { loading, content } = this.state;
-    const PreviewFrame = frame(Preview, this.state.content.javascript);
+    const { content } = this.state;
+    const { previewUrl } = this.props;
     return (
       <div className="editor columns">
         <div className="editor-text-editors column col-5">
@@ -85,15 +74,7 @@ export default class Editor extends React.Component {
           <TextEditor mode="css" content={content.css} onChange={this.setCss} />
         </div>
         <div className="editor-preview column col-7">
-          { loading ?
-            <div className="empty">
-              <Icon name="flash" />
-              <p className="empty-title">Preview Loading</p>
-              <p className="empty-meta"><span className="loading">Loading...</span></p>
-            </div>
-            :
-            <PreviewFrame content={generateCombinedHtml(content)} />
-          }
+          <iframe id="previewFrame" frameBorder="0" src={previewUrl} />
         </div>
       </div>
     );
